@@ -1,0 +1,16 @@
+<suite name="Suite1" verbose="1" >
+    <test name="FirstTest2" >
+        <classes>
+            <class name="BUGAGA.AZAZA.ProbaTest2">
+                <methods>
+                    <include name="test2"></include>
+                </methods>
+            </class>
+            <class name="BUGAGA.ProbaTest">
+                <methods>
+                    <exclude name="test2"></exclude>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

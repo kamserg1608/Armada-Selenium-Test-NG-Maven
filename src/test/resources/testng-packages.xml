@@ -1,0 +1,10 @@
+<suite name="Suite1" verbose="1" >
+<test name="FirstTest" >
+    <packages>
+        <package name="BUGAGA.AZAZA" />
+    </packages>
+
+</test>
+
+
+</suite>

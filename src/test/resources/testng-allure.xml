@@ -1,0 +1,8 @@
+<suite name="Suite1" verbose="1" >
+    <test name="FirstTest2" >
+        <classes>
+            <class name="ru.qa.armada.n04_tests.allure.TestClass"></class>
+            <class name="ru.qa.armada.n04_tests.CreateNewTask"></class>
+        </classes>
+    </test>
+</suite>

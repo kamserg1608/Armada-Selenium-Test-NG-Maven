@@ -1,0 +1,13 @@
+<suite name="Suite1" verbose="1" >
+    <test name="FirstTest2" >
+        <groups>
+            <run>
+                <include name="posite"/>
+                <exclude name="negative"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="BUGAGA.AZAZA" />
+        </packages>
+    </test>
+</suite>
