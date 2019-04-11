@@ -1,4 +1,0 @@
-package ru.qa.armada.n03_applicationStructure.armadaMainPage.commandCentre.n01_radioMonitoring.n01_tasks.windows.n01_creatingAndEditingMonitoringTask.n02_frequincies.n02_bookmarkFrequencies.windows;
-
-public class AddFrequencyGrid {
-}

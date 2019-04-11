@@ -1,7 +1,6 @@
 package ru.qa.armada.n02_appManagerForTest;
 
-import org.openqa.selenium.By;
-import ru.qa.armada.n03_applicationStructure.armadaMainPage.ArmadaMainPage;
+import ru.qa.armada.n03_applicationStructure.ArmadaMainPage;
 import ru.qa.armada.n03_applicationStructure.loginPage.LoginPage;
 
 import java.util.concurrent.TimeUnit;
