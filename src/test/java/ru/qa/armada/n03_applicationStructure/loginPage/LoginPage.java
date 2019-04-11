@@ -27,7 +27,7 @@ public class LoginPage {
   /**
    * Locator -  Main tree "Command centre"
    */
-  @FindBy(xpath = "//span[text()='Пункт управления']")
+  @FindBy(xpath = "//span[text()='Радиоконтроль']")
   private WaitElement commandCentre;
 
   /**
