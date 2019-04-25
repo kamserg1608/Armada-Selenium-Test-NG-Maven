@@ -10,15 +10,10 @@ public class TestBase {
 
   protected ApplicationManager app = new ApplicationManager();
 
-  @BeforeClass
-  public void expandStand(){
-    LetsGo letsGo = new LetsGo();
-    letsGo.formAnArmada();
-  }
-
-
   @BeforeMethod
   public void setUp() {
+    LetsGo letsGo = new LetsGo();
+    letsGo.formAnArmada();
     SingletonWebDriver.getInstance();
     SingletonWaitingItem.getInstance();
     app.init();

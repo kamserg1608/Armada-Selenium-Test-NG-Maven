@@ -44,7 +44,7 @@ public class SingletonWaitingItem{
   }
 
   public static void waitElementClickable(Element element){
-    wait.until( ExpectedConditions.elementToBeClickable(element.getWebElement()) );
+    wait.until( ExpectedConditions. elementToBeClickable(element.getWebElement()) );
   }
 
   public static void presenceOfElementLocated(By element){

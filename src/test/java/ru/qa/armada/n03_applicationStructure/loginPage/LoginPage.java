@@ -24,6 +24,8 @@ public class LoginPage {
 
 //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
+  @FindBy(xpath = "//h1[@id='armadaLoginTitle']")
+  private WaitElement labelLoginPage;
   /**
    * Locator -  Main tree "Command centre"
    */
@@ -102,6 +104,10 @@ public class LoginPage {
   public void waitMainPage() {
     SingletonWaitingItem.waitElementVisibly(commandCentre);
   }
+  public void waitLoginPage(){
+    SingletonWaitingItem.waitElementVisibly(labelLoginPage);
+  }
+
 
   /**
    * Global function including all steps to enter the main window Armada
@@ -120,6 +126,17 @@ public class LoginPage {
    * @param password Use Password "admin"
    */
   public void submitAutorization(String username, String password) {
+    boolean aa = true;
+    int a = 0;
+    while(aa){
+      try {
+        waitLoginPage();
+        aa = false;
+        a += 20;
+      } catch (Exception e) {
+        System.out.println("превышен запрос ожидания" + a);
+      }
+    }
     writeUserName(username);
     writePassword(password);
     submitLogin();

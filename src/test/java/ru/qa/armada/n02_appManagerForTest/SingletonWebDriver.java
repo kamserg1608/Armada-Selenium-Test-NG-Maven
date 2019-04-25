@@ -20,6 +20,7 @@ public class SingletonWebDriver {
 //    If the path to .exe in the system variable not the specified, then is necessary uncomment this line
 //    System.setProperty("webdriver.gecko.driver", "C:\\...\\ArmadaTests\\drivers\\\geckodriver.exe")
 //    System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+    System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
 //    driver = new ChromeDriver();
     switch (browser) {
       case BrowserType.FIREFOX:

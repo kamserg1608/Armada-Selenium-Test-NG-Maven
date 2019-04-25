@@ -11,10 +11,11 @@ public class ApplicationManager {
   private ArmadaMainPage armadaMainPage;
 
   public void init() {
-    SingletonWebDriver.driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    SingletonWebDriver.driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 //    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     SingletonWebDriver.driver.manage().window().maximize();
     SingletonWebDriver.driver.navigate().to("http://localhost:8080/armada");
+    SingletonWebDriver.driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
     loginPage = new LoginPage();
     loginPage.submitAutorization("admin", "admin");
