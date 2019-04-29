@@ -8,10 +8,6 @@
     <artifactId>ArmSelTestNGMaven</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>ArmSelTestNG</name>
-    <!-- clone repository -->
-    <url>https://github.com/kamserg1608/SberbankTestNg</url>
-
     <properties>
 
         <!--region Compilation-->
@@ -106,24 +102,10 @@
         </dependency>
         <!--endregion File-->
 
-        <!--region TestNG and JavaDoc_site-->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-report-plugin</artifactId>
-            <version>3.0.0-M3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-project-info-reports-plugin</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <!--endregion TestNG and JavaDoc_site-->
-
     </dependencies>
 
     <build>
         <plugins>
-
             <!--region Compilation-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -182,18 +164,18 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
 
-                    <!--region TestNG-->
+                <!--region TestNG-->
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
-                    <!--endregion TestNG-->
+                <!--endregion TestNG-->
 
-                    <!--region Allure-->
+                <!--region Allure-->
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <!--endregion Allure-->
+                <!--endregion Allure-->
 
                 </configuration>
 
@@ -209,34 +191,18 @@
 
             </plugin>
             <!--endregion Allure and TestNG-->
-
-            <!--region TestNG and JavaDoc_site-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-            </plugin>
-            <!--endregion TestNG and JavaDoc_site-->
-
         </plugins>
     </build>
 
     <reporting>
+        <excludeDefaults>true</excludeDefaults>
         <plugins>
 
             <!--region TestNG_site-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <!--endregion TestNG_site-->
 
@@ -254,4 +220,5 @@
 
         </plugins>
     </reporting>
+
 </project>
