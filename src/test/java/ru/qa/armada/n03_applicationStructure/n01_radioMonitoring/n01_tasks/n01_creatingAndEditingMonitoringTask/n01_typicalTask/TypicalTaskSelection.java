@@ -7,6 +7,9 @@ import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
 import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
 import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * <h1>This class work with SubWindows "selection of typical tasks" of window "creating a monitoring job"</h1>
  *
@@ -20,6 +23,7 @@ import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
 
 public class TypicalTaskSelection {
 
+  private Logger logger;
 //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
 
@@ -45,6 +49,7 @@ public class TypicalTaskSelection {
    */
   public TypicalTaskSelection() {
     PageFactory.initElements(new CustomFieldDecorator(SingletonWebDriver.driver),this);
+    this.logger = LoggerFactory.getLogger(TypicalTaskSelection.class);
   }
 ///////////////////////////////////////////////////////////////////////
 //endregion
@@ -62,7 +67,7 @@ public class TypicalTaskSelection {
     try {
       SingletonWaitingItem.waitElementAttributeContain(measurementSignalParameters,"class", "x-grid3-highlightrow");
     } catch (Exception e) {
-      System.out.println(e);
+      logger.info(e.toString());
     }
     applyTypicalTaskSelection.click();
   }

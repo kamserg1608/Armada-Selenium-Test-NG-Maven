@@ -5,10 +5,14 @@ import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MainViewInstaller {
     private String services;
     private String browser;
     private String iconDesktop;
+    private Logger logger;
 
     private long start, end;
     private TopLevelWindow mainViewInstaller;
@@ -23,6 +27,7 @@ public class MainViewInstaller {
         this.mainViewInstaller = null;
         this.start = -1;
         this.end = -1;
+        this.logger = LoggerFactory.getLogger(MainViewInstaller.class);
     }
 
     public void waitingForArmadaInstallationWindow(){
@@ -30,7 +35,7 @@ public class MainViewInstaller {
         while (true) {
             if (checkExistArmadaInstallationWindow() != null) {
                 end = System.currentTimeMillis();
-                System.out.println("Процесс запуска процесса" + (end - start));
+                logger.info("Процесс запуска процесса {}", (end - start));
                 break;
             }
             try {
@@ -116,7 +121,7 @@ public class MainViewInstaller {
             while (true) {
                 if (checkLabelReadyInstall() != null) {
                     end = System.currentTimeMillis();
-                    System.out.println("Установка завершена" + (end - start));
+                    logger.info("Установка завершена {}", (end - start));
                     break;
                 }
                 Thread.sleep(300);

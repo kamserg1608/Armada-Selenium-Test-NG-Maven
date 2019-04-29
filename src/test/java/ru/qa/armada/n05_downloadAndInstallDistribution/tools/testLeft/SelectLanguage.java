@@ -4,17 +4,22 @@ import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class SelectLanguage {
     private long start, end;
     private TestProcess armadaProcessInstallation;
     private TopLevelWindow selectLanguage;
+    private Logger logger;
 
     public SelectLanguage(TestProcess armadaProcessInstallation) {
         this.armadaProcessInstallation = armadaProcessInstallation;
         this.selectLanguage = null;
         this.start = -1;
         this.end = -1;
+        this.logger = LoggerFactory.getLogger(SelectLanguage.class);
     }
 
     private void waitingExistSelectLanguage(){
@@ -22,7 +27,7 @@ public class SelectLanguage {
         while (true) {
             if (checkExistLabelSelectLanguage() != null) {
                 end = System.currentTimeMillis();
-                System.out.println("Появления окна выбора языка" + (end - start));
+                logger.info("Появления окна выбора языка {}",(end - start));
                 break;
             }
             try {

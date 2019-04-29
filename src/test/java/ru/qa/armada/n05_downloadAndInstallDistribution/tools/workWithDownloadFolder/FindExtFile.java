@@ -3,15 +3,20 @@ package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithDownloadFo
 import java.io.File;
 import java.io.FilenameFilter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class FindExtFile {
     private File folderDownload;
     private String passFolder;
     private FilenameFilter filter;
+    private Logger logger;
 
     public FindExtFile (String folderDownload, String filter){
         this.passFolder = folderDownload;
         this.folderDownload = new File(folderDownload);
         this.filter = new OnlyExt(filter);
+        this.logger = LoggerFactory.getLogger(FindExtFile.class);
     }
 
     public String passToInstaller(){
@@ -26,8 +31,8 @@ public class FindExtFile {
                 arrayFiles = folderDownload.list(filter);
             }
         } catch (Exception e) {
-            System.out.println("It is not possible to view the file list folder");
-            System.out.println(e);
+            logger.info("It is not possible to view the file list folder");
+            logger.info(e.toString());
         }
         String firstExeFile = "";
         if (arrayFiles.length != 0) {
@@ -37,18 +42,18 @@ public class FindExtFile {
     }
     public void checkFilesInDirectory(String dirname, File folderDownload) {
         if(folderDownload.isDirectory()) {
-            System.out.println("Directory " + dirname);
+            logger.info("Directory {}",dirname);
             String s[] = folderDownload.list();
             for (int i = 0; i < s.length; i++) {
                 File f = new File(dirname + "/" + s[i]);
                 if (f.isDirectory()) {
-                    System.out.println(s[i] + " is it Directory");
+                    logger.info("{} is it Directory", s[i]);
                 } else {
-                    System.out.println(s[i] + " is it File");
+                    logger.info("{} is it File", s[i]);
                 }
             }
         } else {
-            System.out.println("Не является каталогом");
+            logger.debug("Не является каталогом");
         }
     }
 }

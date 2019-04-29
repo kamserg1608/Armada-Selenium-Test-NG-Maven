@@ -1,22 +1,28 @@
 <configuration>
-    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+<!--    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>-->
+
+    <property name="LOG_FILE" value="testFile" />
+    <property name="LOG_DIR" value="target/logsSlf4j" />
+
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>log-${bySecond}.txt</file>
+        <!--        <file>log-${bySecond}.txt</file>-->
+        <file>${LOG_DIR}/${LOG_FILE}.log</file>
         <!--<file>testFile.log</file>-->
-        <!--<append>true</append>-->
+        <append>false</append>
         <!-- set immediateFlush to false for much higher logging throughput -->
         <immediateFlush>true</immediateFlush>
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <pattern>%-30(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{35} - %msg%n</pattern>
         </encoder>
     </appender>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%-30(%green(%d{HH:mm:ss.SSS}) %yellow([%thread])) %magenta(%-5level) %highlight(%logger{30}) - %cyan(%msg%n)</pattern>
         </encoder>
     </appender>
 

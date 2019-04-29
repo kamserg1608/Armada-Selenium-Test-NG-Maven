@@ -5,10 +5,14 @@ import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.testobjects.ProcessPattern;
 import com.smartbear.testleft.testobjects.TestProcess;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class RunApplication {
     private String passInstaller;
     private TestProcess installationProcess;
     private TestProcess armadaProcesssInstallation;
+    private Logger logger;
     private long start, end;
 
     public RunApplication(String passInstaller) {
@@ -16,6 +20,7 @@ public class RunApplication {
         this.installationProcess = null;
         this.start = -1;
         this.end = -1;
+        this.logger = LoggerFactory.getLogger(RunApplication.class);
     }
 
     public TestProcess applicationLaunch(){
@@ -34,7 +39,7 @@ public class RunApplication {
             while (true) {
                 if (checkExistTestProcess() != null) {
                     end = System.currentTimeMillis();
-                    System.out.println("Процесс запуска процесса" + (end - start));
+                    logger.info("Процесс запуска процесса {}",(end - start));
                     break;
                 }
                 Thread.sleep(300);

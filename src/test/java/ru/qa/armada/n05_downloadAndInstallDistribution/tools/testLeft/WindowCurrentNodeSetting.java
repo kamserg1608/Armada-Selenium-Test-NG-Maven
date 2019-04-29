@@ -5,12 +5,16 @@ import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WindowCurrentNodeSetting {
     private long start, end;
     private TestProcess armadaProcessInstallation;
     private TopLevelWindow windowCurrentNodeSetting;
     private String address;
     private String name;
+    private Logger logger;
 
     public WindowCurrentNodeSetting(TestProcess armadaProcessInstallation, String address, String name) {
         this.armadaProcessInstallation = armadaProcessInstallation;
@@ -19,6 +23,7 @@ public class WindowCurrentNodeSetting {
         this.windowCurrentNodeSetting = null;
         this.start = -1;
         this.end = -1;
+        this.logger = LoggerFactory.getLogger(WindowCurrentNodeSetting.class);
     }
 
     private void waitWindowCurrentNodeSetting() {
@@ -26,7 +31,7 @@ public class WindowCurrentNodeSetting {
         while (true) {
             if (checkWindowCurrentNodeSettings() != null) {
                 end = System.currentTimeMillis();
-                System.out.println("Появление окна 'Настройка текущего узла'" + (end - start));
+                logger.debug("Появление окна 'Настройка текущего узла' {}",(end - start));
                 break;
             }
             try {

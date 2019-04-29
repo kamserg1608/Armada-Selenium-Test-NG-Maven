@@ -7,14 +7,18 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UnzippingArmada {
     private String fullPathtoUnzip;
     private String fullPassToZip;
+    private Logger logger;
 
     public UnzippingArmada(String fullPassToZip, String fullPathtoUnzip){
         this.fullPassToZip = fullPassToZip;
         this.fullPathtoUnzip = fullPathtoUnzip;
+        this.logger = LoggerFactory.getLogger(UnzippingArmada.class);
     }
 
     public boolean unzippind(){
@@ -37,8 +41,8 @@ public class UnzippingArmada {
             zis.closeEntry();
             zis.close();
         } catch (IOException e) {
-            System.out.println("file unzip error");
-            System.out.println(e);
+            logger.info("file unzip error");
+            logger.info(e.toString());
         }
         return (Objects.requireNonNull(destDir.list()).length != 0);
     }

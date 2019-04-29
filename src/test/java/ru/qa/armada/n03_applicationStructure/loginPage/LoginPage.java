@@ -9,6 +9,9 @@ import ru.qa.armada.n01_workWithWebElement.webPageElements.WaitElement;
 import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
 import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * <h1>This class work with "login form of Armada"</h1>
  *
@@ -21,6 +24,9 @@ import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
  */
 
 public class LoginPage {
+
+    private Logger logger;
+
 
 //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
@@ -68,6 +74,7 @@ public class LoginPage {
 
   public LoginPage() {
     PageFactory.initElements(new CustomFieldDecorator(SingletonWebDriver.driver), this);
+    this.logger = LoggerFactory.getLogger(LoginPage.class);
   }
 
 /////////////////////////////////////////////////////////////////
@@ -134,7 +141,7 @@ public class LoginPage {
         aa = false;
         a += 20;
       } catch (Exception e) {
-        System.out.println("превышен запрос ожидания" + a);
+          logger.info("превышен запрос ожидания {}" , a);
       }
     }
     writeUserName(username);

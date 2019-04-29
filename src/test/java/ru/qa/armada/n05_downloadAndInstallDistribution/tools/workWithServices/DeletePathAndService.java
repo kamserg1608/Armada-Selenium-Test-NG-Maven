@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DeletePathAndService {
     private String uninstallPass;
+    private Logger logger;
 
     public DeletePathAndService(String unistallPass) {
         this.uninstallPass = unistallPass;
+        this.logger = LoggerFactory.getLogger(DeletePathAndService.class);
     }
 
     /**
@@ -21,7 +26,7 @@ public class DeletePathAndService {
             String commandRemovalService = "cmd /c \"cd /d C:\\armada && " + uninstallPass + " \"";
             Process queryServices = Runtime.getRuntime().exec(commandRemovalService);
             queryServices.waitFor();
-            System.out.println("Удалены сервисы");
+            logger.debug("Delete Services");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

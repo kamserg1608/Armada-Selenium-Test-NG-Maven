@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class StopServices {
     private String useServices;
 //    use services to debug
@@ -16,6 +19,7 @@ public class StopServices {
     private String fullCommandStopProcess;
     private String line;
     private long start, end;
+    private Logger logger;
 
     public StopServices(String useServices){
         this.useServices = useServices;
@@ -27,6 +31,7 @@ public class StopServices {
         this.start = -1;
         this.end = -1;
         this.line = "";
+        this.logger = LoggerFactory.getLogger(StopServices.class);
     }
 
     public void stopProcess() throws IOException, InterruptedException {
@@ -71,7 +76,7 @@ public class StopServices {
             }
         } while(!line.contains(codeError));
         end = System.currentTimeMillis();
-        System.out.println("Сервис не сущеуствует" + (end - start));
+        logger.debug("Сервис не сущеуствует {}",(end - start));
     }
 
 }

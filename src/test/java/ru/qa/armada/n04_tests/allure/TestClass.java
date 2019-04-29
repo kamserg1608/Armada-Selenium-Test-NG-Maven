@@ -15,18 +15,17 @@ import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TestClass {
-    private static final Logger LOG = Logger.getLogger(TestClass.class.getName());
     private static final org.slf4j.Logger logger1 = LoggerFactory.getLogger(TestClass.class);
 
 
     @BeforeMethod
     public void beforeTest() {
-        LOG.info("Logged to allure: " + "AZAZA");
+        logger1.info("Logged to allure: " + "AZAZA");
     }
 
     @AfterMethod
     public void afterTest() {
-        LOG.info("Тест завершен!");
+        logger1.info("Тест завершен!");
     }
 
 
@@ -40,11 +39,11 @@ public class TestClass {
         Steps.checkSumStep(3, 2, 5);
         logger1.info("ARTEM");
         step("ARTEM");
-        LOG.warning("DADADADA2");
+        logger1.warn("DADADADA2");
         Steps.logToAllure("BUGAGA");
         Assert.assertTrue( 1 + 3== 4, "Сумма слагаемых не соответствует ожидаемому значению");
         Steps.logToAllure("BUGAGA");
-        LOG.info("Logged to allure: " + "AZAZA");
+        logger1.info("Logged to allure: " + "AZAZA");
         Assert.assertTrue(true);
 
     }
