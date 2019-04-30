@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <!--endregion Compilation-->
 
         <!--region Allure and TestNG-->
@@ -23,8 +24,21 @@
         <!--region Allure-->
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
         <aspectj.version>1.9.1</aspectj.version>
+        <allure.version>2.9</allure.version>
         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+        <allure.resource.directory>${basedir}/src/test/resources/allureConfiguration</allure.resource.directory>
+        <allure.propertiesFilePath>${allure.resource.directory}/allure.properties</allure.propertiesFilePath>
         <!--endregion  Allure-->
+
+        <!--region Javadoc-->
+        <javaDoc.resource.directory>src/test/resources/doc-files</javaDoc.resource.directory>
+        <javaDoc.results.directory>${project.build.directory}/site/testapidocs/doc-files</javaDoc.results.directory>
+        <javaDoc.vesion>3.1.0</javaDoc.vesion>
+        <!--endregion Javadoc-->
+
+        <!--region TestNG-->
+<!--        <testNG.suiteXmlFile.file>src/test/resources/testSuite/testng-allure.xml</testNG.suiteXmlFile.file>-->
+        <!--endregion TestNG-->
 
         <!--region TestLeft-->
         <testleft.systemPath>C:/Program Files (x86)/SmartBear/TestLeft 4/API/Java/testleft-4.0.jar</testleft.systemPath>
@@ -110,7 +124,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -120,6 +134,14 @@
 
             <!--region Allure-->
             <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.version}</version>
+            </plugin>
+            <!--endregion Allure-->
+
+            <!--region Allure and Javadoc Resources-->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>${maven-resources-plugin.version}</version>
@@ -127,6 +149,8 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
                 <executions>
+
+                    <!--region Allure-->
                     <execution>
                         <id>copy-resources</id>
                         <phase>validate</phase>
@@ -138,44 +162,67 @@
                             <!--<outputDirectory>c:\Program Files (x86)\Jenkins\workspace\Maven Project\target\allure-results</outputDirectory>-->
                             <resources>
                                 <resource>
-                                    <directory>src/test/resources</directory>
+                                    <directory>${allure.resource.directory}</directory>
                                     <includes>
-                                        <include>allure.properties</include>
-                                        <include>environment.properties</include>
-                                        <include>categories.json</include>
+                                        <include>**/*.*</include>
                                     </includes>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
+                    <!--endregion Allure-->
+
+                    <!--region Javadoc-->
+                    <execution>
+                        <id>copy-resources-1</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${javaDoc.results.directory}</outputDirectory>
+                            <!--<outputDirectory>c:\Program Files (x86)\Jenkins\workspace\Maven Project\target\allure-results</outputDirectory>-->
+                            <resources>
+                                <resource>
+                                    <directory>${javaDoc.resource.directory}</directory>
+                                    <includes>
+                                        <include>**/*.png</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!--endregion Javadoc-->
+
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.9</version>
-            </plugin>
-            <!--endregion Allure-->
+            <!--endregion Allure and Javadoc Resources-->
 
-            <!--region Allure and TestNG-->
+            <!--region Allure and TestNG Surefire-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
 
-                <!--region TestNG-->
+                    <!--region TestNG-->
                     <suiteXmlFiles>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>${testNG.suiteXmlFile.file}</suiteXmlFile>
                     </suiteXmlFiles>
-                <!--endregion TestNG-->
+                    <!--endregion TestNG-->
 
-                <!--region Allure-->
+                    <!--region Allure-->
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                <!--endregion Allure-->
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure.results.directory}</value>
+                        </property>
+                    </systemProperties>
+                    <!--endregion Allure-->
 
                 </configuration>
 
@@ -190,7 +237,8 @@
                 <!--endregion Allure-->
 
             </plugin>
-            <!--endregion Allure and TestNG-->
+            <!--endregion Allure and TestNG Surefire-->
+
         </plugins>
     </build>
 
@@ -210,7 +258,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${javaDoc.vesion}</version>
                 <configuration>
                     <show>private</show>
                     <splitindex>true</splitindex>
