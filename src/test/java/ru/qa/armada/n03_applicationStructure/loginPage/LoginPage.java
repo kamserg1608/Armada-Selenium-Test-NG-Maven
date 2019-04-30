@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0
  * <p><b>Graphic representation of the page object pattern: </b></p>
  * <p>
- * <img src="{@docRoot}/../src/test/resources/doc-files/LoginPage.png" alt="альтернативный текст">
+ * <img src="{@docRoot}/doc-files/LoginPage.png" alt="альтернативный текст">
  * </p>
  */
 

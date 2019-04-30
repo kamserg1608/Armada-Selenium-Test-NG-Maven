@@ -11,7 +11,7 @@ import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
  * @version 1.0
  * <p><b>Graphic representation of the page object pattern: </b></p>
  * <p>
- * <img src="{@docRoot}/../src/test/resources/doc-files/BookmarkAntennas.png" alt="альтернативный текст">
+ * <img src="{@docRoot}/doc-files/BookmarkAntennas.png" alt="альтернативный текст">
  * </p>
  */
 

@@ -18,7 +18,7 @@ import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.Tasks
  * @version 1.0
  * <p><b>Graphic representation of the page object pattern: </b></p>
  * <p>
- *   <img src="{@docRoot}/../src/test/resources/doc-files/RadioMonitoring.png" alt="альтернативный текст">
+ *   <img src="{@docRoot}/doc-files/RadioMonitoring.png" alt="альтернативный текст">
  * </p>
  * */
 
