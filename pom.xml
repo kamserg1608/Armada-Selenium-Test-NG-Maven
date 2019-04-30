@@ -148,6 +148,25 @@
                             </resources>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>copy-resources-1</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/site/testapidocs/doc-files</outputDirectory>
+                            <!--<outputDirectory>c:\Program Files (x86)\Jenkins\workspace\Maven Project\target\allure-results</outputDirectory>-->
+                            <resources>
+                                <resource>
+                                    <directory>src/test/resources/doc-files</directory>
+                                    <includes>
+                                        <include>**/*.png</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
