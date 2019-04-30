@@ -191,6 +191,7 @@
 
             </plugin>
             <!--endregion Allure and TestNG-->
+
         </plugins>
     </build>
 
