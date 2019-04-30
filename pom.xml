@@ -37,7 +37,7 @@
         <!--endregion Javadoc-->
 
         <!--region TestNG-->
-        <testNG.suiteXmlFile.file>src/test/resources/testSuite/testng-allure.xml</testNG.suiteXmlFile.file>
+        <suiteXmlFile>src/test/resources/testSuite/testng-allure.xml</suiteXmlFile>
         <!--endregion TestNG-->
 
         <!--region TestLeft-->
@@ -207,7 +207,7 @@
 
                 <!--region TestNG-->
                     <suiteXmlFiles>
-                        <suiteXmlFile>${testNG.suiteXmlFile.file}</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 <!--endregion TestNG-->
 
