@@ -6,11 +6,8 @@ import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.qa.armada.n04_tests.allure.CommonFunctions;
+import ru.qa.armada.n04_tests.allure.WorkWithAttachment;
 import ru.qa.armada.n04_tests.allure.Steps;
-
-
-import java.io.IOException;
 
 /**
  * <h1>Work with installation language selection window</h1>
@@ -51,7 +48,7 @@ public class SelectLanguage {
                 end = System.currentTimeMillis();
                 logger.debug("Finish waiting windows appear {}",(end - start));
                 Steps.logToAllureWithValue("Finish waiting windows appear ",(end - start));
-                CommonFunctions.getScreen("Appearance of language selection window");
+                WorkWithAttachment.getScreen("Appearance of language selection window");
 
                 break;
             }

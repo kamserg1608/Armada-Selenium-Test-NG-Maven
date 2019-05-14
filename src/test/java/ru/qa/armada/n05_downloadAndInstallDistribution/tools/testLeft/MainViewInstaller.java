@@ -2,12 +2,11 @@ package ru.qa.armada.n05_downloadAndInstallDistribution.tools.testLeft;
 
 import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.InvocationException;
-import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.qa.armada.n04_tests.allure.CommonFunctions;
+import ru.qa.armada.n04_tests.allure.WorkWithAttachment;
 import ru.qa.armada.n04_tests.allure.Steps;
 
 
@@ -62,7 +61,7 @@ public class MainViewInstaller {
             if (checkExistArmadaInstallationWindow() != null) {
                 end = System.currentTimeMillis();
                 logger.debug("waiting for the process to start {}", (end - start));
-                CommonFunctions.getScreen("Windows Armada Installing");
+                WorkWithAttachment.getScreen("Windows Armada Installing");
                 break;
             }
             try {
@@ -159,7 +158,7 @@ public class MainViewInstaller {
 
             Steps.logToAllure("Click button 'Run Install'");
             logger.debug("Click button 'Run Install'");
-            CommonFunctions.getScreen("Run install software 'Armada'");
+            WorkWithAttachment.getScreen("Run install software 'Armada'");
 
         } catch (HttpException | InvocationException e) {
             Steps.logToAllure("could not find the button 'Run Install'");
@@ -180,7 +179,7 @@ public class MainViewInstaller {
             checkBoxActivation(browser,browserCb);
             checkBoxActivation(iconDesktop,iconDesktopCb);
         }
-        CommonFunctions.getScreen("Appearance of main windows");
+        WorkWithAttachment.getScreen("Appearance of main windows");
         runInstall();
 
     }
@@ -199,7 +198,7 @@ public class MainViewInstaller {
                     end = System.currentTimeMillis();
                     logger.debug("Finish waiting for successful installation of Armada {}", (end - start));
                     Steps.logToAllureWithValue("Finish waiting for successful installation of Armada", (end - start));
-                    CommonFunctions.getScreen("Appearance of 'successful installation of Armada'");
+                    WorkWithAttachment.getScreen("Appearance of 'successful installation of Armada'");
                     break;
                 }
                 Thread.sleep(300);

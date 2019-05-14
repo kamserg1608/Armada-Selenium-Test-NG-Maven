@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class CommonFunctions {
+public class WorkWithAttachment {
     private static final String RESOURCES = "src/test/resources/attachments";
     private static final String JAVADOC = "src/test/resources/doc-files";
     private static final String SCREENSHOT = "target/screenshots";
 
-    private CommonFunctions() {
+    private WorkWithAttachment() {
         throw new IllegalAccessError("Utility class");
     }
 

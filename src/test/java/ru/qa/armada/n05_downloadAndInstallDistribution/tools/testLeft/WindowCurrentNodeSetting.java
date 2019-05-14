@@ -7,7 +7,7 @@ import com.smartbear.testleft.testobjects.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.qa.armada.n04_tests.allure.CommonFunctions;
+import ru.qa.armada.n04_tests.allure.WorkWithAttachment;
 import ru.qa.armada.n04_tests.allure.Steps;
 
 
@@ -63,7 +63,7 @@ public class WindowCurrentNodeSetting {
                 end = System.currentTimeMillis();
                 Steps.logToAllureWithValue("Finish appearance of the 'Current node configuration window'", (end - start));
                 logger.debug("Finish appearance of the 'Current node configuration window' {}",(end - start));
-                CommonFunctions.getScreen("Appearance of 'Current node configuration'");
+                WorkWithAttachment.getScreen("Appearance of 'Current node configuration'");
                 break;
             }
             try {
@@ -198,7 +198,7 @@ public class WindowCurrentNodeSetting {
         waitWindowCurrentNodeSetting();
         setNameNode();
         setAddressNode();
-        CommonFunctions.getScreen("Setting set'Current node configuration'");
+        WorkWithAttachment.getScreen("Setting set'Current node configuration'");
         saveCurrentNode();
     }
 }

@@ -60,7 +60,7 @@ public class WorkWithScreenshot {
         getScreenshot();
 
         try {
-            CommonFunctions.getBytesScreenshot(this.screenshotName, allureName);
+            WorkWithAttachment.getBytesScreenshot(this.screenshotName, allureName);
         } catch (IOException e) {
             e.printStackTrace();
         }

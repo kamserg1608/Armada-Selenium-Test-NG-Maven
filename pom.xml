@@ -38,7 +38,8 @@
         <!--endregion Javadoc-->
 
         <!--region TestNG-->
-        <suiteXmlFile>src/test/resources/testSuite/testng-allure.xml</suiteXmlFile>
+<!--      <suiteXmlFile> Use in profile-->
+        <suiteXmlFile>src/test/resources/testSuite/default.xml</suiteXmlFile>
         <testNG.version>6.14.3</testNG.version>
         <!--endregion TestNG-->
 
@@ -48,12 +49,37 @@
 
     </properties>
 
+    <profiles>
+
+        <!--region UseForDeveloper-->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <suiteXmlFile>src/test/resources/testSuite/developer.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--endregion UseForDeveloper-->
+
+        <!--region UseForTesting-->
+        <profile>
+            <id>test</id>
+            <properties>
+                <suiteXmlFile>src/test/resources/testSuite/testng-allure.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--endregion UseForTesting-->
+
+    </profiles>
+
     <dependencies>
+
+        <!--region AllureEnvironment-->
         <dependency>
             <groupId>com.github.automatedowl</groupId>
             <artifactId>allure-environment-writer</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!--endregion AllureEnvironment-->
 
         <!--region TestNg-->
         <dependency>
@@ -230,12 +256,16 @@
                         </property>
                     </systemProperties>
                 <!--endregion Allure-->
+
+                <!--region AllureEnvironment-->
                     <systemPropertyVariables>
                         <allure.testNG.version>${allure.testNG.version}</allure.testNG.version>
                         <testNG.version>${testNG.version}</testNG.version>
                         <maven-surefire-plugin.version>${maven-surefire-plugin.version}</maven-surefire-plugin.version>
                         <maven-resources-plugin.version>${maven-resources-plugin.version}</maven-resources-plugin.version>
                     </systemPropertyVariables>
+                <!--endregion AllureEnvironment-->
+
                 </configuration>
 
                 <!--region Allure-->
