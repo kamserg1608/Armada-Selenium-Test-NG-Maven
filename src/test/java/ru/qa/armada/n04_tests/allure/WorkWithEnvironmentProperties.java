@@ -29,6 +29,7 @@ public class WorkWithEnvironmentProperties {
         logger.info("allure.testNG.version = " + System.getProperty("allure.testNG.version"));
         logger.info("maven-surefire-plugin.version = " + System.getProperty("maven-surefire-plugin.version"));
         logger.info("maven-resources-plugin.version = " + System.getProperty("maven-resources-plugin.version"));
+        logger.info("suiteXmlFile = " + System.getProperty("suiteXmlFile"));
         logger.info("---------------");
     }
     private void addAllureEnvironment(){
@@ -42,6 +43,7 @@ public class WorkWithEnvironmentProperties {
                         .put("allureTestNG_version"        , System.getProperty("allure.testNG.version"))
                         .put("mavenSurefirePlugin_Version" , System.getProperty("maven-surefire-plugin.version"))
                         .put("mavenResourcesPlugin_Version", System.getProperty("maven-resources-plugin.version"))
+                        .put("suiteXmlFile"                , System.getProperty("suiteXmlFile"))
                         .put("browser_Name"                , browserName)
                         .put("browser_Version"             , browserVersion)
                         .build(), System.getProperty("user.dir") + "/target/allure-results/");
@@ -51,10 +53,10 @@ public class WorkWithEnvironmentProperties {
         Capabilities cap = ((RemoteWebDriver) SingletonWebDriver.driver).getCapabilities();
         browserName = cap.getBrowserName();
         browserVersion = cap.getVersion();
-        logger.debug("---------------");
-        logger.debug("browser_Name = " + browserName);
-        logger.debug("browser_Version = " + browserVersion);
-        logger.debug("---------------");
+        logger.info("---------------");
+        logger.info("browser_Name = " + browserName);
+        logger.info("browser_Version = " + browserVersion);
+        logger.info("---------------");
         SingletonWebDriver.driver.quit();
     }
 

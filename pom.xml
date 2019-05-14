@@ -263,6 +263,7 @@
                         <testNG.version>${testNG.version}</testNG.version>
                         <maven-surefire-plugin.version>${maven-surefire-plugin.version}</maven-surefire-plugin.version>
                         <maven-resources-plugin.version>${maven-resources-plugin.version}</maven-resources-plugin.version>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </systemPropertyVariables>
                 <!--endregion AllureEnvironment-->
 
