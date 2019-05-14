@@ -11,7 +11,7 @@ public class CheckLogin extends TestBase {
   @Test
   public void testCheckLogin() {
     Logger logger = LoggerFactory.getLogger(CheckLogin.class);
-    logger.info("Hello World");
+    logger.debug("Hello World");
   }
 
 }

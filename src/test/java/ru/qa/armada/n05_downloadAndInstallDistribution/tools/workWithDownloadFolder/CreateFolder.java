@@ -2,6 +2,12 @@ package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithDownloadFo
 
 import java.io.File;
 
+/**
+ * <h1>Use for create a "Armada" download directory</h1>
+ *
+ * @author KamyninSA
+ * @version 1.0
+ */
 public class CreateFolder {
     public long start, end;
     File folderDownload;
@@ -12,6 +18,9 @@ public class CreateFolder {
         folderDownload= new File(passFolder);
     }
 
+    /**
+     * Create directory
+     */
     public void createDirectory() {
         folderDownload.mkdirs();
     }

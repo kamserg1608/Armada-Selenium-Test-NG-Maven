@@ -10,6 +10,13 @@ import java.util.zip.ZipInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+/**
+ * <h1>Used to extract the archive</h1>
+ *
+ * @author KamyninSA
+ * @version 1.0
+ */
 public class UnzippingArmada {
     private String fullPathtoUnzip;
     private String fullPassToZip;
@@ -21,6 +28,18 @@ public class UnzippingArmada {
         this.logger = LoggerFactory.getLogger(UnzippingArmada.class);
     }
 
+    /**
+     * the code allowing unzip to subpacks is taken from "stackoverflow"
+     *
+     * <h3>Uses the following functions.</h3>
+     * <div>
+     *   <ul>
+     *     <li> Use the {@link #unzippind() } method.</li>
+     *   </ul>
+     * </div>
+     *
+     * @return is there something left for extract
+     */
     public boolean unzippind(){
         File destDir = null;
         try {
@@ -41,8 +60,8 @@ public class UnzippingArmada {
             zis.closeEntry();
             zis.close();
         } catch (IOException e) {
-            logger.info("file unzip error");
-            logger.info(e.toString());
+            logger.debug("file unzip error");
+            logger.debug(e.toString());
         }
         return (Objects.requireNonNull(destDir.list()).length != 0);
     }

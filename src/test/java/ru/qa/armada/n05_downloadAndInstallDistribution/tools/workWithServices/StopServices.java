@@ -1,13 +1,30 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithServices;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.qa.armada.n04_tests.allure.Steps;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+
+
+/**
+ * <h1>Used for stop "Armada" services</h1>
+ *
+ * @author KamyninSA
+ * @version 1.0
+ * <p><b>Graphic representation of the page object pattern: </b></p>
+ * <p>
+ * <img src="{@docRoot}/doc-files/ServicesArmada.png" alt="Picture 'Stop services'">
+ * </p>
+ */
 public class StopServices {
+
+//region elementDefinitionBlock
+///////////////////////////////////////////////////////////////////
     private String useServices;
 //    use services to debug
 //    private String useServices = "KeysightCommunicationsFabric";
@@ -20,7 +37,11 @@ public class StopServices {
     private String line;
     private long start, end;
     private Logger logger;
+/////////////////////////////////////////////////////////////////
+//endregion
 
+//region constructorDefinitionBlock
+///////////////////////////////////////////////////////////////////
     public StopServices(String useServices){
         this.useServices = useServices;
         this.commandQuery = "sc query ";
@@ -33,7 +54,22 @@ public class StopServices {
         this.line = "";
         this.logger = LoggerFactory.getLogger(StopServices.class);
     }
+/////////////////////////////////////////////////////////////////
+//endregion
 
+    /**
+     * Used to stop services through the manipulation of the command "sc query"
+     * for check process
+     *
+     *  @throws IOException if something went wrong
+     *  @throws InterruptedException if something went wrong
+     * <h3>Uses the following functions.</h3>
+     * <div>
+     *   <ul>
+     *     <li> Use the {@link #waitProcess() } method.</li>
+     *   </ul>
+     * </div>
+     */
     public void stopProcess() throws IOException, InterruptedException {
         Process queryServices = Runtime.getRuntime().exec(fullCommandQueryExistProcess);
         BufferedReader reader = new BufferedReader(new InputStreamReader(queryServices.getInputStream()));
@@ -62,8 +98,16 @@ public class StopServices {
         }
     }
 
+    /**
+     * Used to wait for the process to complete
+     */
     public void waitProcess(){
+
+
         start = System.currentTimeMillis();
+        Steps.logToAllure("Start of service launch");
+        logger.debug("Start of service launch");
+
         do {
             try {
                 Thread.sleep(1000);
@@ -72,11 +116,18 @@ public class StopServices {
                 line = reader.readLine();
                 reader.close();
             } catch (InterruptedException | IOException e) {
+
+                end = System.currentTimeMillis();
+                Steps.logToAllureWithValue("Services don't exist", (end - start));
+                logger.debug("Services don't exist {}",(end - start));
+
                 e.printStackTrace();
             }
         } while(!line.contains(codeError));
+
         end = System.currentTimeMillis();
-        logger.debug("Сервис не сущеуствует {}",(end - start));
+        Steps.logToAllureWithValue("Finish of service launch", (end - start));
+        logger.debug("Finish of service launch {}",(end - start));
     }
 
 }

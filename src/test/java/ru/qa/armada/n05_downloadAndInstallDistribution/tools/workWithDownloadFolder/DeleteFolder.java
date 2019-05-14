@@ -8,6 +8,12 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * <h1>This class deleting folder using various checks</h1>
+ *
+ * @author KamyninSA
+ * @version 1.0
+ */
 public class DeleteFolder {
     private File folderDownload;
     private String passFolder;
@@ -19,6 +25,9 @@ public class DeleteFolder {
         this.logger = LoggerFactory.getLogger(DeleteFolder.class);
     }
 
+    /**
+     * Main function deleting folder
+     */
     public void deleteFolder(){
         if (folderDownload.isDirectory()) {
             if(folderDownload.list().length != 0 ){
@@ -26,14 +35,14 @@ public class DeleteFolder {
                 try {
                     FileUtils.deleteDirectory(folderDownload );
                 } catch (IOException e) {
-                    logger.info("directory cannot be deleted");
-                    logger.info(e.toString());
+                    logger.debug("directory cannot be deleted");
+                    logger.debug(e.toString());
                 }
                 if(folderDownload.exists()){
-                    logger.info("delay work not correct");
+                    logger.debug("delay work not correct");
                 }
                 long end = System.currentTimeMillis();
-                logger.info("Время затраченное на удаление папки {} {}", passFolder,(end - start));
+                logger.debug("time spent deleting a folder {} {}", passFolder, (end - start));
             }
         }
     }

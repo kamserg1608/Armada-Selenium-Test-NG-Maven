@@ -5,7 +5,12 @@ import java.io.FilenameFilter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * <h1>Searches for the first "distributionArmada.exe" file in the extracted folder</h1>
+ *
+ * @author KamyninSA
+ * @version 1.0
+ */
 public class FindExtFile {
     private File folderDownload;
     private String passFolder;
@@ -19,11 +24,20 @@ public class FindExtFile {
         this.logger = LoggerFactory.getLogger(FindExtFile.class);
     }
 
+    /**
+     * Returns the full path to the file
+     * @return returns the full path to the file
+     */
     public String passToInstaller(){
         String fullPassInstaller = passFolder + "\\" + takeFirstExeDistribution();
         return fullPassInstaller;
     }
 
+    /**
+     * Searches for the first "exe" file in the extracted folder
+     *
+     * @return path to the first "exe" file
+     */
     public String takeFirstExeDistribution(){
         String arrayFiles[] = new String[0];
         try {
@@ -31,8 +45,8 @@ public class FindExtFile {
                 arrayFiles = folderDownload.list(filter);
             }
         } catch (Exception e) {
-            logger.info("It is not possible to view the file list folder");
-            logger.info(e.toString());
+            logger.debug("It is not possible to view the file list folder");
+            logger.debug(e.toString());
         }
         String firstExeFile = "";
         if (arrayFiles.length != 0) {
@@ -40,20 +54,27 @@ public class FindExtFile {
         }
         return firstExeFile;
     }
+
+    /**
+     * Checks for what this file is it
+     *
+     * @param dirname folder or file name
+     * @param folderDownload location of file or folder
+     */
     public void checkFilesInDirectory(String dirname, File folderDownload) {
         if(folderDownload.isDirectory()) {
-            logger.info("Directory {}",dirname);
+            logger.debug("Directory {}",dirname);
             String s[] = folderDownload.list();
             for (int i = 0; i < s.length; i++) {
                 File f = new File(dirname + "/" + s[i]);
                 if (f.isDirectory()) {
-                    logger.info("{} is it Directory", s[i]);
+                    logger.debug("{} is it Directory", s[i]);
                 } else {
-                    logger.info("{} is it File", s[i]);
+                    logger.debug("{} is it File", s[i]);
                 }
             }
         } else {
-            logger.debug("Не является каталогом");
+            logger.debug("Not a directory");
         }
     }
 }

@@ -26,6 +26,8 @@
         </encoder>
     </appender>
 
+    <logger name="ru.qa.armada.n04_tests.allure" level="INFO" />
+
     <root level="debug">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />

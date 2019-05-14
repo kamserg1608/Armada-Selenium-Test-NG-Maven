@@ -6,7 +6,22 @@ import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.qa.armada.n04_tests.allure.CommonFunctions;
+import ru.qa.armada.n04_tests.allure.Steps;
 
+
+import java.io.IOException;
+
+/**
+ * <h1>Work with installation language selection window</h1>
+ *
+ * @author KamyninSA
+ * @version 1.0
+ * <p><b>Graphic representation of the page object pattern: </b></p>
+ * <p>
+ * <img src="{@docRoot}/doc-files/.png" alt="Language selection">
+ * </p>
+ */
 
 public class SelectLanguage {
     private long start, end;
@@ -22,12 +37,22 @@ public class SelectLanguage {
         this.logger = LoggerFactory.getLogger(SelectLanguage.class);
     }
 
+    /**
+     * waiting for the installation window to appear
+     */
     private void waitingExistSelectLanguage(){
         start = System.currentTimeMillis();
+        logger.debug("Start waiting windows appear");
+        Steps.logToAllure("Start waiting windows appear");
+
         while (true) {
             if (checkExistLabelSelectLanguage() != null) {
+
                 end = System.currentTimeMillis();
-                logger.info("Появления окна выбора языка {}",(end - start));
+                logger.debug("Finish waiting windows appear {}",(end - start));
+                Steps.logToAllureWithValue("Finish waiting windows appear ",(end - start));
+                CommonFunctions.getScreen("Appearance of language selection window");
+
                 break;
             }
             try {
@@ -38,6 +63,10 @@ public class SelectLanguage {
         }
 
     }
+    /**
+     * waiting for label the installation window to appear
+     * @return window Select Language
+     */
     private TopLevelWindow checkExistLabelSelectLanguage(){
         try {
             selectLanguage = (TopLevelWindow) armadaProcessInstallation.tryFind(TopLevelWindow.class, new AWTPattern() {{
@@ -51,6 +80,10 @@ public class SelectLanguage {
         }
         return selectLanguage;
     }
+
+    /**
+     * keystroke applying selected language
+     */
     private void acceptanceChosenLanguage(){
         try {
             Button okClick = selectLanguage.find(Button.class, new AWTPattern() {{
@@ -63,6 +96,15 @@ public class SelectLanguage {
         }
     }
 
+    /**
+     * <h3>Main function select language</h3>
+     * <div>
+     *   <ul>
+     *     <li> Use the {@link #waitingExistSelectLanguage() } method.</li>
+     *     <li> Use the {@link #acceptanceChosenLanguage() } method. </li>
+     *   </ul>
+     * </div>
+     */
     public void selectLanguage(){
         waitingExistSelectLanguage();
         acceptanceChosenLanguage();

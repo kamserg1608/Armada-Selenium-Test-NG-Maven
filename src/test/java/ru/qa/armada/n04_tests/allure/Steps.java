@@ -30,9 +30,22 @@ public class Steps {
     }
 
 
-    @Step("{log}")
+    @Step(value = "{log}")
     public static void logToAllure(String log) {
         logger.debug("Logged to allure: " + log);
-        logger.debug("Logged to allure: "  +  log);
+//        logger.debug("Logged to allure: "  +  log);
+    }
+
+    @Step(value = "{log}")
+    public static  void logToAllureWithValue(String log, long value) {
+        logger.debug(log + " " + value);
+    }
+    @Step(value = "{log}")
+    public static  void logToAllureWithValue(String log, String value) {
+        logger.debug(log + " " + value);
+    }
+    @Step(value = "{log}")
+    public static void logToAllureWithValue(String log, boolean value) {
+        logger.debug(log + " " + value);
     }
 }

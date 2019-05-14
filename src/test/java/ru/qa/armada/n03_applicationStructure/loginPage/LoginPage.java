@@ -28,7 +28,7 @@ public class LoginPage {
     private Logger logger;
 
 
-//region elementDefinitionBlock
+  //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
   @FindBy(xpath = "//h1[@id='armadaLoginTitle']")
   private WaitElement labelLoginPage;
@@ -65,7 +65,7 @@ public class LoginPage {
 /////////////////////////////////////////////////////////////////
 //endregion
 
-//region constructorDefinitionBlock
+  //region constructorDefinitionBlock
 ///////////////////////////////////////////////////////////////////
 
   /**
@@ -141,7 +141,7 @@ public class LoginPage {
         aa = false;
         a += 20;
       } catch (Exception e) {
-          logger.info("превышен запрос ожидания {}" , a);
+          logger.debug("Request Exceeded {}" , a);
       }
     }
     writeUserName(username);

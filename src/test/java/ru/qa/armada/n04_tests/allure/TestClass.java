@@ -1,14 +1,22 @@
 package ru.qa.armada.n04_tests.allure;
 
+import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.*;
 import static io.qameta.allure.Allure.step;
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import org.slf4j.LoggerFactory;
+import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n05_downloadAndInstallDistribution.LetsGo;
+
 import java.util.logging.Logger;
 
 import java.io.IOException;
@@ -23,6 +31,36 @@ public class TestClass {
 
     @BeforeMethod
     public void beforeTest() {
+        System.out.println("---------------");
+        System.out.println("user.dir = " + System.getProperty("user.dir"));
+        System.out.println("JDK.version = " + System.getProperty("java.version"));
+        System.out.println("OS.name = " + System.getProperty("os.name"));
+        System.out.println("OS.version = " + System.getProperty("os.version"));
+        System.out.println("OS.arch = " + System.getProperty("os.arch"));
+        System.out.println("testNG.version = " + System.getProperty("testNG.version"));
+        System.out.println("allure.testNG.version = " + System.getProperty("allure.testNG.version"));
+        System.out.println("maven-surefire-plugin.version = " + System.getProperty("maven-surefire-plugin.version"));
+        System.out.println("maven-resources-plugin.version = " + System.getProperty("maven-resources-plugin.version"));
+        logger1.info("Logged to allure: " + "AZAZA");
+        SingletonWebDriver.getInstance();
+        Capabilities cap = ((RemoteWebDriver) SingletonWebDriver.driver).getCapabilities();
+        String browserName = cap.getBrowserName();
+        String brovserVersion = cap.getVersion();
+        SingletonWebDriver.driver.quit();
+        logger1.info("Logged to allure: " + "AZAZA");
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("JDK_version"                 , System.getProperty("java.version"))
+                        .put("OperatingSystem_Name"        , System.getProperty("os.name"))
+                        .put("OperatingSystem_Version"     , System.getProperty("os.version"))
+                        .put("OperatingSystem_Architecture", System.getProperty("os.arch"))
+                        .put("testNG_version"              , System.getProperty("testNG.version"))
+                        .put("allureTestNG_version"        , System.getProperty("allure.testNG.version"))
+                        .put("mavenSurefirePlugin_Version" , System.getProperty("maven-surefire-plugin.version"))
+                        .put("mavenResourcesPlugin_Version", System.getProperty("maven-resources-plugin.version"))
+                        .put("browser_Name"                , browserName)
+                        .put("browser_Version"             , brovserVersion)
+                        .build(), System.getProperty("user.dir") + "/target/allure-results/");
         logger1.info("Logged to allure: " + "AZAZA");
     }
 
@@ -36,6 +74,15 @@ public class TestClass {
     public static void checkSummationStep123(int num1, int num2, int expectedSum) {
         Assert.assertTrue(num1 + num2 == expectedSum,"Сумма слагаемых не соответствует ожидаемому значению");
     }
+//    @Test
+//    public void testLetsGo() {
+//        step("Start installing the armada program");
+//        LetsGo letsGo = new LetsGo();
+//        letsGo.formAnArmada();
+//        SingletonWebDriver.getInstance();
+//        SingletonWaitingItem.getInstance();
+//        step("Finish installing the armada program");
+//    }
 
     @Test
     public void testDemoConnectionSuccess() {
@@ -66,12 +113,14 @@ public class TestClass {
     public void testDemoAttachments1() throws IOException {
         CommonFunctions.getBytes("picture.jpg");
         CommonFunctions.getBytes("text.txt");
+        CommonFunctions.getScreen("CatDogAndDuck1");
         Assert.assertTrue(true);
     }
 
     @Test
     public void testDemoAttachments2() throws IOException {
         CommonFunctions.getBytesAnnotationWithArgs("json.json");
+        CommonFunctions.getScreen("CatDogAndDuck2");
         Assert.assertTrue(true);
     }
 

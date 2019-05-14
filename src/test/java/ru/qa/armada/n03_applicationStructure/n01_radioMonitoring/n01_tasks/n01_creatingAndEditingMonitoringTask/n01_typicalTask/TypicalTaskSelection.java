@@ -67,7 +67,7 @@ public class TypicalTaskSelection {
     try {
       SingletonWaitingItem.waitElementAttributeContain(measurementSignalParameters,"class", "x-grid3-highlightrow");
     } catch (Exception e) {
-      logger.info(e.toString());
+      logger.debug(e.toString());
     }
     applyTypicalTaskSelection.click();
   }
