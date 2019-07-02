@@ -44,7 +44,7 @@
         <!--endregion TestNG-->
 
         <!--region TestLeft-->
-        <testleft.systemPath>C:/Program Files (x86)/SmartBear/TestLeft 4/API/Java/testleft-4.0.jar</testleft.systemPath>
+        <testleft.systemPath>C:/Program Files (x86)/SmartBear/TestLeft 4/API/Java/testleft-4.10.jar</testleft.systemPath>
         <!--endregion TestLeft-->
 
     </properties>
