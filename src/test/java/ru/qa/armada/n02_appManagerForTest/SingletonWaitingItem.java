@@ -6,6 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.Element;
 
+/**
+ * This class is used as a singleton to work with the WaitWebDriver
+ */
 public class SingletonWaitingItem{
   private static WebDriverWait wait;
   private int time = 20;
@@ -17,6 +20,10 @@ public class SingletonWaitingItem{
     wait = new WebDriverWait(SingletonWebDriver.driver, time);
   }
 
+  /**
+   * Creating an instance of the selected driver
+   * @return WaitWebDriver created
+   */
   public static SingletonWaitingItem getInstance(){
     if(instance == null){
       synchronized(sync){
@@ -27,31 +34,61 @@ public class SingletonWaitingItem{
     return instance;
   }
 
+  /**
+   * Waiting for an item is Visibly
+   * @param element locator
+   */
   public static void waitElementVisibly(Element element){
     wait.until( ExpectedConditions.visibilityOf(element.getWebElement()) );
   }
 
+  /**
+   * Waiting for an attribute to be set to a specific value
+   * @param element locator
+   * @param nameAttribute attribute name
+   * @param ValueAttribute value name
+   */
   public static void waitElementAttributeContain(Element element, String nameAttribute, String ValueAttribute){
     wait.until( ExpectedConditions.attributeContains(element.getWebElement(), nameAttribute, ValueAttribute) );
   }
 
+  /**
+   * Waiting for item selection
+   * @param element locator
+   * @param select turned on or turned off
+   */
   public static void waitElementSelected(Element element, Boolean select){
     wait.until( ExpectedConditions.elementSelectionStateToBe(element.getWebElement(), select) );
   }
 
+  /**
+   * Wait until the item disappears
+   * @param element locator
+   */
   public static void waitElementInvisibly(Element element){
     wait.until( ExpectedConditions.invisibilityOf(element.getWebElement()) );
   }
 
+  /**
+   * Wait until the item is clickable
+   * @param element locator
+   */
   public static void waitElementClickable(Element element){
     wait.until( ExpectedConditions. elementToBeClickable(element.getWebElement()) );
   }
 
+  /**
+   * Waiting for an item to appear
+   * @param element locator
+   */
   public static void presenceOfElementLocated(By element){
     wait.until( ExpectedConditions.presenceOfElementLocated(element) );
   }
 
-
+  /**
+   * Stop program execution
+   * @param timeoutInMilliSeconds number of seconds
+   */
   public static void sleep(int timeoutInMilliSeconds) {
     try {
       Thread.sleep(timeoutInMilliSeconds);

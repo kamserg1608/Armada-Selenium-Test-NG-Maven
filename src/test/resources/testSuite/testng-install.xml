@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Installation program" verbose="1" >
+    <test name="Armada" >
+        <classes>
+            <class name="ru.qa.armada.n04_tests.p_00_softwareInstallation.TestTypesSoftwareInstallations">
+                <methods>
+                    <include name="executeSmallInstalling"/>
+                    <exclude name="executeCompleteInstalling"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

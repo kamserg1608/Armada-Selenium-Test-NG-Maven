@@ -8,7 +8,7 @@ package ru.qa.armada.n03_applicationStructure;
  * @version 1.0
  * <p><b>Graphic representation of the page object pattern: </b></p>
  * <p>
- *   <img src="{@docRoot}/doc-files/CommandCentre.png" alt="альтернативный текст">
+ *   <img src="{@docRoot}/doc-files/CommandCentre.png" alt="CommandCentre.png">
  * </p>
  * */
 
