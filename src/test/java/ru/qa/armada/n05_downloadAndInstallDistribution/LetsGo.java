@@ -25,13 +25,22 @@ public class LetsGo {
 
     /**
      * Main function for install distribution
+     * installation from the unpacked distribution
      */
-    public void formAnArmada() {
+    public void completeInstallationOfArmada() {
         ArmadaDeployment armadaDeployment = new ArmadaDeployment(armadaFolder, uninstall, mainFolder, URL);
         armadaDeployment.deleteArmada();
 
         armadaDeployment.downloadAndUnzip();
 
+        armadaDeployment.gettingInstallationPathOfArmada();
+        armadaDeployment.workWithUI();
+    }
+
+    public void smallInstallationOfArmada(){
+        ArmadaDeployment armadaDeployment = new ArmadaDeployment(armadaFolder, uninstall, mainFolder, URL);
+        armadaDeployment.deleteArmada();
+        armadaDeployment.gettingInstallationPathOfArmada();
         armadaDeployment.workWithUI();
     }
 

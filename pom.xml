@@ -64,7 +64,7 @@
         <profile>
             <id>test</id>
             <properties>
-                <suiteXmlFile>src/test/resources/testSuite/testng-allure123.xml</suiteXmlFile>
+                <suiteXmlFile>src/test/resources/testSuite/testng-testing.xml</suiteXmlFile>
             </properties>
         </profile>
         <!--endregion UseForTesting-->

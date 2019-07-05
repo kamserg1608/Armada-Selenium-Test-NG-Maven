@@ -41,7 +41,7 @@ public class TestClass {
 //    public void testLetsGo() {
 //        step("Start installing the armada program");
 //        LetsGo letsGo = new LetsGo();
-//        letsGo.formAnArmada();
+//        letsGo.completeInstallationOfArmada();
 //        SingletonWebDriver.getInstance();
 //        SingletonWaitingItem.getInstance();
 //        step("Finish installing the armada program");
@@ -58,6 +58,7 @@ public class TestClass {
         Steps.checkSumStep(3, 2, 5);
         logger1.info("ARTEM");
         step("ARTEM");
+        checkSummationStep123(1,2,3);
         logger1.warn("DADADADA2");
         Steps.logToAllure("BUGAGA");
         Assert.assertTrue( 1 + 3== 4, "Сумма слагаемых не соответствует ожидаемому значению");

@@ -130,8 +130,13 @@ public class ArmadaDeployment {
         end = System.currentTimeMillis();
         Steps.logToAllureWithValue("Stop unzipping distribution", (end - start));
 
-        FindExtFile findExtFile = new FindExtFile(extractFolder,filter);
+//        FindExtFile findExtFile = new FindExtFile(extractFolder,filter);
+//
+//        useExeDistrib = findExtFile.passToInstaller();
+    }
 
+    public void gettingInstallationPathOfArmada(){
+        FindExtFile findExtFile = new FindExtFile(extractFolder,filter);
         useExeDistrib = findExtFile.passToInstaller();
     }
 

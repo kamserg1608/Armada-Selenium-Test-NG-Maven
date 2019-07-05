@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="program operation check" verbose="1" >
+    <test name="Armada" >
+        <classes>
+            <class name="ru.qa.armada.n04_tests.p_09_radioMonitoring_new_.T_01_typicalTasks">
+                <methods>
+                    <include name="testC108894"/>
+                    <exclude name="testC108895"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

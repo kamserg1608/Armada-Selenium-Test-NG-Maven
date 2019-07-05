@@ -17,15 +17,16 @@ import org.slf4j.LoggerFactory;
  * @version 1.0
  * <p><b>Graphic representation of the page object pattern: </b></p>
  * <p>
- * <img src="{@docRoot}/doc-files/TypicalTaskSelection.png" alt="альтернативный текст">
+ * <img src="{@docRoot}/doc-files/TypicalTaskSelection.png" alt="TypicalTaskSelection.png">
  * </p>
  */
 
 public class TypicalTaskSelection {
 
-  private Logger logger;
+
 //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
+  private Logger logger;
 
   /**
    * Locator -  table row typical job measurement "measurement of signal parameters"

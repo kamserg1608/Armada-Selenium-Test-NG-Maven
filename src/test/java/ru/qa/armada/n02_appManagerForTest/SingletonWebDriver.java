@@ -11,6 +11,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+/**
+ * This class is used as a singleton to work with the WebDriver
+ */
 public class SingletonWebDriver {
   private String browser = BrowserType.CHROME;
   private static final Object sync = new Object();
@@ -18,6 +21,10 @@ public class SingletonWebDriver {
   public static WebDriver driver;
 
   private static volatile SingletonWebDriver instance = null;
+
+  /**
+   *  Driver Initialization Selection
+   */
   private SingletonWebDriver(){
 //    If the path to .exe in the system variable not the specified, then is necessary uncomment this line
 //    System.setProperty("webdriver.gecko.driver", "C:\\...\\ArmadaTests\\drivers\\\geckodriver.exe")
@@ -36,6 +43,11 @@ public class SingletonWebDriver {
         break;
     }
   }
+
+  /**
+   * Creating an instance of the selected driver
+   * @return WebDriver created
+   */
   public static SingletonWebDriver getInstance(){
     if(instance == null){
       synchronized(sync){
