@@ -10,6 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import org.slf4j.LoggerFactory;
+import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n05_downloadAndInstallDistribution.LetsGo;
 
 import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
@@ -37,15 +40,17 @@ public class TestClass {
         Assert.assertTrue(num1 + num2 == expectedSum,"Сумма слагаемых не соответствует ожидаемому значению");
     }
 
-//    @Test
-//    public void testLetsGo() {
-//        step("Start installing the armada program");
-//        LetsGo letsGo = new LetsGo();
-//        letsGo.completeInstallationOfArmada();
-//        SingletonWebDriver.getInstance();
-//        SingletonWaitingItem.getInstance();
-//        step("Finish installing the armada program");
-//    }
+
+    @Test
+    public void testLetsGo() {
+        step("Start installing the armada program");
+        LetsGo letsGo = new LetsGo();
+        letsGo.completeInstallationOfArmada();
+        SingletonWebDriver.getInstance();
+        SingletonWaitingItem.getInstance();
+        step("Finish installing the armada program");
+    }
+
 
     @BeforeTest
     public void addEnvironment(){
