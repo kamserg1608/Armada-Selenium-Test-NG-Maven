@@ -9,7 +9,7 @@ import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator
 import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TableWebElement;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.WaitElement;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 /**
  * <h1>This class work with "editing of reference tasks"</h1>

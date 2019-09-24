@@ -4,8 +4,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
-import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.AccordionElement;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.SingleTypicalTaskComboBox;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 public class BSanalysis {
     private Logger logger;

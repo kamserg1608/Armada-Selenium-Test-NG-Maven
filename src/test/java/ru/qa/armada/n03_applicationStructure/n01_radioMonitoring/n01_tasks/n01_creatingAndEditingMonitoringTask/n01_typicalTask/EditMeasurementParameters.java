@@ -2,7 +2,7 @@ package ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n01_
 
 import org.openqa.selenium.support.PageFactory;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 public class EditMeasurementParameters {
 

@@ -5,7 +5,7 @@ import com.smartbear.testleft.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.qa.armada.n04_tests.allure.Steps;
+import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 /**
  * <h1>singleton driver work "TestLeft" </h1>

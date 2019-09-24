@@ -1,4 +1,4 @@
-package ru.qa.armada.n04_tests.allure;
+package ru.qa.armada.n02_appManagerForTest.allure;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TextField;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 public class AddFrequency {
 

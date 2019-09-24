@@ -1,14 +1,15 @@
 [
   {
     "name": "Неизвестная проблема",
-    "matchedStatuses": ["broken", "failed"],
+    "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
     "messageRegex": ".*что-то пошло не так.*"
   },
   {
-    "name": "Нет данных",
-    "matchedStatuses": ["broken"],
+    "name": "No data",
+    "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
     "traceRegex": ".*NullPointerException.*"
   },
+
   {
     "name": "Product defects",
     "matchedStatuses": ["failed"]

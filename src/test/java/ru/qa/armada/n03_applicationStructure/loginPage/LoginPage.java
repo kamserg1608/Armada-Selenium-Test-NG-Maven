@@ -1,3 +1,13 @@
+/**
+ * Domain classes used to produce .....
+ * <p>
+ * These classes contain the ......
+ * </p>
+ *
+ * @since 1.0
+ * @author somebody
+ * @version 1.0
+ */
 package ru.qa.armada.n03_applicationStructure.loginPage;
 
 import org.openqa.selenium.support.FindBy;
@@ -6,8 +16,8 @@ import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator
 import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TextField;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.WaitElement;
-import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

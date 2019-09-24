@@ -1,7 +1,10 @@
-package ru.qa.armada.n02_appManagerForTest;
+package ru.qa.armada.n02_appManagerForTest.testNG;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import ru.qa.armada.n02_appManagerForTest.managerTest.ApplicationManager;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 
 /**

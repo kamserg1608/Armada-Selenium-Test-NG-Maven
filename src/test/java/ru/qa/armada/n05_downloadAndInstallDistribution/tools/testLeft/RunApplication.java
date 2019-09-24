@@ -7,7 +7,7 @@ import com.smartbear.testleft.testobjects.TestProcess;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.qa.armada.n04_tests.allure.Steps;
+import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 /**
  * <h1>Start and wait for the installation process "Armada"</h1>

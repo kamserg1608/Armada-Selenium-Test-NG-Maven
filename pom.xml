@@ -39,7 +39,8 @@
 
         <!--region TestNG-->
 <!--      <suiteXmlFile> Use in profile-->
-        <suiteXmlFile>src/test/resources/testSuite/default.xml</suiteXmlFile>
+<!--        <suiteXmlFile>src/test/resources/testSuite/default.xml</suiteXmlFile>-->
+        <suiteXmlFile>src/test/resources/testSuite/testng-allure.xml</suiteXmlFile>
         <testNG.version>6.14.3</testNG.version>
         <!--endregion TestNG-->
 
@@ -309,6 +310,7 @@
                 <configuration>
                     <show>private</show>
                     <splitindex>true</splitindex>
+                    <overview>${basedir}/src/test/resource/package-info.java</overview>
                 </configuration>
             </plugin>
             <!--endregion JavaDoc-->

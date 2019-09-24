@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-import static ru.qa.armada.n04_tests.allure.Steps.logToAllure;
-import static ru.qa.armada.n04_tests.allure.Steps.logToAllureWithValue;
+import static ru.qa.armada.n02_appManagerForTest.allure.Steps.logToAllure;
+import static ru.qa.armada.n02_appManagerForTest.allure.Steps.logToAllureWithValue;
 
 
 /**

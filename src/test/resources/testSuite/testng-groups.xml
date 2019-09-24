@@ -1,4 +1,4 @@
-<suite name="Suite1" verbose="1" >
+ <suite name="Suite1" verbose="1" >
     <test name="FirstTest2" >
         <groups>
             <run>

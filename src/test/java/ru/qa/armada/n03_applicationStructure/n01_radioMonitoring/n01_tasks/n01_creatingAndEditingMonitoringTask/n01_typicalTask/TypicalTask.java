@@ -8,8 +8,8 @@ import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TabElement;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TextField;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.WaitElement;
-import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 
 /**

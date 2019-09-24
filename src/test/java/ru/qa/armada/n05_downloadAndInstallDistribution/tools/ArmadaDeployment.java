@@ -2,8 +2,7 @@ package ru.qa.armada.n05_downloadAndInstallDistribution.tools;
 
 import com.smartbear.testleft.testobjects.TestProcess;
 
-import ru.qa.armada.n04_tests.allure.Steps;
-import ru.qa.armada.n04_tests.allure.Steps.*;
+import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 import ru.qa.armada.n05_downloadAndInstallDistribution.tools.download.DownloadDistribution;
 import ru.qa.armada.n05_downloadAndInstallDistribution.tools.testLeft.*;

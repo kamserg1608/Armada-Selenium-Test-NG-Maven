@@ -1,16 +1,11 @@
 package ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n02_editingOfReferenceTasks;
-
-
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.AccordionElement;
-import ru.qa.armada.n01_workWithWebElement.webPageElements.ListWebElements;
-import ru.qa.armada.n01_workWithWebElement.webPageElements.TableWebElement;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
-
+import ru.qa.armada.n01_workWithWebElement.webPageElements.TableWebElement;import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 /**
  * <h1>This class work with "Creating a typical monitoring task"</h1>
  *
@@ -42,7 +37,7 @@ public class CreatingTypicalMonitoringTask {
     /**
      * Locator - accordion active part"
      */
-    @FindBy(xpath = "//span[contains(text(),'Измерение параметров сигналов')]/./parent::div//td//div")
+    @FindBy(xpath = "//span[contains(text(),'змерение параметров сигналов')]/./parent::div//td//div")
     private AccordionElement measurementOfSignalParameters;
 
     /**

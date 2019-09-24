@@ -5,8 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TabElement;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.WaitElement;
-import ru.qa.armada.n02_appManagerForTest.SingletonWaitingItem;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n01_creatingAndEditingMonitoringTask.n03_equipment.windowBookmarks.BookmarkEquipment;
 
 /**

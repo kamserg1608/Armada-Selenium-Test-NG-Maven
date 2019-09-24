@@ -8,7 +8,7 @@ import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator
 import ru.qa.armada.n01_workWithWebElement.webPageElements.AccordionElement;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.DoubleTypicalTaskComboBox;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.SingleTypicalTaskComboBox;
-import ru.qa.armada.n02_appManagerForTest.SingletonWebDriver;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 
 public class MeasurementOfSignalParameters {
     private Logger logger;
@@ -31,7 +31,7 @@ public class MeasurementOfSignalParameters {
     private final String RangeSpectrogramAndAccumulatedSpectrum = "Спектрограмма диапазона / Накопленный спектр";
     private final String SPD                                    = "Частотно-временная диаграмма (SPD)";
 
-    @FindBy(xpath = "//span[contains(text(),'Измерение параметров сигналов')]")
+    @FindBy(xpath = "//span[contains(text(),'змерение параметров сигналов')]")
     AccordionElement tabMeasurementSignal;
 
     @FindBy(xpath = "//label[contains(text(),'Метод')]")
@@ -52,7 +52,7 @@ public class MeasurementOfSignalParameters {
     @FindBy(xpath = "//label[contains(text(),'Параметр накопления векторов')]")
     AccordionElement vectorAccumulation;
 
-    @FindBy(xpath = "//label[contains(text(),'Измерение угла места')]")
+    @FindBy(xpath = "//label[contains(text(),'змерение угла места')]")
     AccordionElement angleMeasurement;
 
     @FindBy(xpath = "//label[contains(text(),'Получить список гипотез')]")

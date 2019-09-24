@@ -7,8 +7,8 @@ import com.smartbear.testleft.testobjects.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.qa.armada.n04_tests.allure.WorkWithAttachment;
-import ru.qa.armada.n04_tests.allure.Steps;
+import ru.qa.armada.n02_appManagerForTest.allure.WorkWithAttachment;
+import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 
 /**

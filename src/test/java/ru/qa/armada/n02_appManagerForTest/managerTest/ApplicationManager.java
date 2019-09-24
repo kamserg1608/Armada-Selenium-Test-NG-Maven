@@ -1,5 +1,6 @@
-package ru.qa.armada.n02_appManagerForTest;
+package ru.qa.armada.n02_appManagerForTest.managerTest;
 
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 import ru.qa.armada.n03_applicationStructure.ArmadaMainPage;
 import ru.qa.armada.n03_applicationStructure.loginPage.LoginPage;
 

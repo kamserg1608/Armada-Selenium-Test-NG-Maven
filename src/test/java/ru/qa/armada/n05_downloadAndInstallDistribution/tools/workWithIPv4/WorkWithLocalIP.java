@@ -1,6 +1,6 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithIPv4;
 
-import ru.qa.armada.n04_tests.allure.Steps;
+import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

@@ -2,7 +2,7 @@ package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithServices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.qa.armada.n04_tests.allure.Steps;
+import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 import java.io.BufferedReader;
 import java.io.IOException;
