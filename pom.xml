@@ -34,7 +34,7 @@
         <!--region Javadoc-->
         <javaDoc.resource.directory>src/test/resources/doc-files</javaDoc.resource.directory>
         <javaDoc.results.directory>${project.build.directory}/site/testapidocs/doc-files</javaDoc.results.directory>
-        <javaDoc.vesion>3.1.0</javaDoc.vesion>
+        <javaDoc.vesion>3.1.1</javaDoc.vesion>
         <!--endregion Javadoc-->
 
         <!--region TestNG-->
@@ -45,7 +45,7 @@
         <!--endregion TestNG-->
 
         <!--region TestLeft-->
-        <testleft.systemPath>C:/Program Files (x86)/SmartBear/TestLeft 4/API/Java/testleft-4.10.jar</testleft.systemPath>
+        <testleft.systemPath>C:/Program Files (x86)/SmartBear/TestLeft 4/API/Java/testleft-4.20.jar</testleft.systemPath>
         <!--endregion TestLeft-->
 
     </properties>
@@ -82,12 +82,27 @@
         </dependency>
         <!--endregion AllureEnvironment-->
 
+        <!--region Javadoc-->
+        <!--   for plugin-->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${javaDoc.vesion}</version>
+        </dependency>
+        <!--endregion Javadoc-->
+
         <!--region TestNg-->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testNG.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!--        for plugin-->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
         </dependency>
         <!--endregion TestNg-->
 
