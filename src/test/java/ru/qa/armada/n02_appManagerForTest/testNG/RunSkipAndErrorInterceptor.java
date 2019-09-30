@@ -17,6 +17,9 @@ public class RunSkipAndErrorInterceptor implements IHookable {
         iHookCallBack.runTestMethod(res);
 
         if (res.getThrowable() != null) {
+            String aaa = res.getThrowable().getCause().getClass().toString();
+
+//            res.getThrowable().getCause().getClass();
             countOfError++;
             if (countOfError >= 3) {
                 System.out.println("Skip test because countOfError = " + countOfError);
@@ -39,6 +42,7 @@ public class RunSkipAndErrorInterceptor implements IHookable {
             res.setThrowable(null);
             System.out.println("Cleaning system to the initial state");
         }
+        countOfError = 0;
     }
 
     public void test1() throws Exception {

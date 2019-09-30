@@ -7,8 +7,13 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 
 /**
@@ -37,10 +42,10 @@ public class UnzippingArmada {
      *     <li> Use the {@link #unzippind() } method.</li>
      *   </ul>
      * </div>
-     *
-     * @return is there something left for extract
      */
-    public boolean unzippind(){
+    @Step(value = "Unzip distribution")
+    public void unzippind(){
+        logger.debug("Start unzipping distribution");
         File destDir = null;
         try {
             destDir = new File(fullPathtoUnzip);
@@ -60,13 +65,16 @@ public class UnzippingArmada {
             zis.closeEntry();
             zis.close();
         } catch (IOException e) {
-            logger.debug("file unzip error");
-            logger.debug(e.toString());
+            logger.error("file unzip error");
+            Assert.fail("file unzip error");
+            e.printStackTrace();
         }
-        return (Objects.requireNonNull(destDir.list()).length != 0);
+        logger.debug("Stop unzipping distribution");
+        checkUnzipApplicationFromTeamCity(destDir);
+
     }
 
-    public File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+    private File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         File destFile = new File(destinationDir, zipEntry.getName());
 
         String destDirPath = destinationDir.getCanonicalPath();
@@ -77,6 +85,16 @@ public class UnzippingArmada {
         }
 
         return destFile;
+    }
+
+    private void checkUnzipApplicationFromTeamCity(File destDir) {
+        if(destDir.list().length != 0){
+            Allure.step("correct unzip application: " + fullPathtoUnzip, Status.PASSED);
+            logger.debug("Unzip {}", fullPathtoUnzip);
+        } else {
+            Assert.fail("No correct unzip application");
+            logger.error("No Unzip {}", fullPathtoUnzip);
+        }
     }
 }
 

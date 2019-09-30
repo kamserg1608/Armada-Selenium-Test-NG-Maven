@@ -37,22 +37,20 @@ public class TestClass {
     }
 
     @AfterMethod
-    public void afterTest(Method m) {
-        Steps.infoLogToAllureAndMethod("Finish test", m.getName(), logger1);
+    public void afterTest(Method m) throws IOException {
+//        Steps.infoLogToAllureAndMethod("Finish test", m.getName(), logger1);
+        WorkWithAttachment.getBytesLog("testFile.log");
 //        logger1.info("Тест завершен!");
     }
 
 
     @Test(enabled = false)
-    public void testLetsGo() {
-//        step("Start installing the armada program");
-        Steps.infoLogToAllure("Start installing the armada program", logger1);
+    @Description("Armada software installation")
+    public void fullSoftwareInstall() {
         LetsGo letsGo = new LetsGo();
         letsGo.completeInstallationOfArmada();
         SingletonWebDriver.getInstance();
         SingletonWaitingItem.getInstance();
-        Steps.infoLogToAllure("Finish installing the armada program", logger1);
-//        step("Finish installing the armada program");
     }
 
     @Test
@@ -60,7 +58,7 @@ public class TestClass {
         Steps.checkSumStep(3, 2, 5);
         Steps.infoLogToAllure("ARTEM", logger1);
 //        logger1.info("ARTEM");
-//        step("ARTEM");
+        step("ARTEM");
         Steps.checkSummationStep123(1,2,3);
         Steps.warnLogToAllure("DADADADA2", logger1);
 //        logger1.warn("DADADADA2");
@@ -147,25 +145,29 @@ public class TestClass {
     }
 
     @Test
+    @Issue(value = "AR-11591")
+    public void testDemoIssueAnnotation() {
+        Assert.assertEquals(1 + 2, 4);
+    }
+
+
     @Flaky
+    @Epic(value = "Математика")
+    @Feature(value = "AZAZAZA")
+    @Test
     public void testDemoFlakyAnnotation() {
         int randomNum = ThreadLocalRandom.current().nextInt(0, 2);
         if (randomNum == 0) {
-            Assert.assertTrue(true);
+//            Assert.assertTrue(true);
+            Assert.fail();
         } else {
             Assert.fail();
         }
     }
 
     @Test
-    @Issue(value = "CQ-17197")
-    public void testDemoIssueAnnotation() {
-        Assert.assertEquals(1 + 2, 4);
-    }
-
-    @Test
-//    @TmsLink(value = "TL-678")
-    @TmsLink(value = "1798")
+//    @TmsLink(value = "TL-678")108894
+    @TmsLink(value = "108894")
     public void testDemoTmsLinkAnnotation() {
         Assert.assertEquals(1, 1);
     }

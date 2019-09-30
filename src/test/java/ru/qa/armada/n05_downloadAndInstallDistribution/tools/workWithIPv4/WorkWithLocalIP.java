@@ -1,5 +1,7 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithIPv4;
 
+import io.qameta.allure.Step;
+import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 import java.net.InetAddress;
@@ -29,6 +31,7 @@ public class WorkWithLocalIP {
      * Getting IP
      * @return IPv4
      */
+    @Step(value = "take current IP")
     public String takeLocalIP() {
         try {
             IP = InetAddress.getLocalHost();
@@ -38,9 +41,8 @@ public class WorkWithLocalIP {
             logger.debug("Current IP of OS {}",localIPv4);
 
         } catch (UnknownHostException e) {
-
-            Steps.logToAllureWithValue("Current IP of OS ",localIPv4);
-            logger.debug("Current IP of OS {}",localIPv4);
+            Assert.fail("Don't take current IP of OS");
+            logger.error("Current IP of OS {}",localIPv4);
             e.printStackTrace();
         }
 

@@ -38,7 +38,7 @@ public class WorkWithAttachment {
         return Files.readAllBytes(Paths.get(RESOURCES, resourceName));
     }
     public static void getScreen(String allureName) {
-        Steps.logToAllureWithValue("The screenshot below is attached: ", allureName);
+//        Steps.logToAllureWithValue("The screenshot below is attached: ", allureName);
         WorkWithScreenshot workWithScreenshot = new WorkWithScreenshot();
         workWithScreenshot.addScreenshotToAllure(allureName);
     }

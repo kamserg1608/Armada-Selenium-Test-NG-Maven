@@ -5,8 +5,12 @@ import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.testobjects.ProcessPattern;
 import com.smartbear.testleft.testobjects.TestProcess;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 /**
@@ -24,7 +28,6 @@ public class RunApplication {
     private TestProcess installationProcess;
     private TestProcess armadaProcesssInstallation;
     private Logger logger;
-    private long start, end;
 /////////////////////////////////////////////////////////////////
 //endregion
 
@@ -33,8 +36,6 @@ public class RunApplication {
     public RunApplication(String passInstaller) {
         this.passInstaller = passInstaller;
         this.installationProcess = null;
-        this.start = -1;
-        this.end = -1;
         this.logger = LoggerFactory.getLogger(RunApplication.class);
     }
 /////////////////////////////////////////////////////////////////
@@ -44,18 +45,14 @@ public class RunApplication {
      * launch installation file
      * @return installation application startup process
      */
+    @Step(value = "launch installation file")
     public TestProcess applicationLaunch(){
         try {
-            installationProcess = DriverTestLeft.driver.getApplications().run(passInstaller);
-
-            Steps.logToAllure("Run install distribution");
             logger.debug("Run install distribution");
-
+            installationProcess = DriverTestLeft.driver.getApplications().run(passInstaller);
         } catch (ApiException | HttpException e) {
-
-            Steps.logToAllure("failed to start the application");
-            logger.debug("failed to start the application");
-
+            Assert.fail("failed to start the application");
+            logger.error("failed to start the application");
             e.printStackTrace();
         }
         waitingForProcessInstallation();
@@ -67,33 +64,31 @@ public class RunApplication {
      */
     private void waitingForProcessInstallation(){
         try {
-
-            start = System.currentTimeMillis();
-            Steps.logToAllure("Start waiting for the installation process");
             logger.debug("Start waiting for the installation process");
-
-            while (true) {
+            long start = System.currentTimeMillis();
+            while ( processFreeze(start) ) {
                 if (checkExistTestProcess() != null) {
-
-                    end = System.currentTimeMillis();
-                    logger.debug("Stop waiting for the installation process {}",(end - start));
-                    Steps.logToAllureWithValue("Stop waiting for the installation process",(end - start));
-
+                    Allure.step("Stop waiting for the installation process", Status.PASSED);
+                    logger.debug("Stop waiting for the installation process");
                     break;
                 }
                 Thread.sleep(300);
             }
         } catch (InterruptedException e) {
-
-            end = System.currentTimeMillis();
-            logger.debug("Failed to wait for the installation process {}",(end - start));
-            Steps.logToAllureWithValue("Failed to wait for the installation process",(end - start));
-
+            logger.error("Failed to wait for the installation process");
+            Assert.fail("Failed to wait for the installation process");
             e.printStackTrace();
         }
-
     }
-
+    private boolean processFreeze(long start){
+        if( (System.currentTimeMillis() - start) > 1200000){
+            Assert.fail("don't appearance current node configuration window");
+            logger.error("don't appearance current node configuration window");
+            return  false;
+        } else {
+            return true;
+        }
+    }
     /**
      * Search for installation process
      * @return current installation process

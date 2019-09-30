@@ -1,7 +1,12 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithServices;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import static io.qameta.allure.Allure.step;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 import java.io.BufferedReader;
@@ -35,7 +40,6 @@ public class StopServices {
     private String stopProcess;
     private String fullCommandStopProcess;
     private String line;
-    private long start, end;
     private Logger logger;
 /////////////////////////////////////////////////////////////////
 //endregion
@@ -49,8 +53,6 @@ public class StopServices {
         this.fullCommandQueryExistProcess = commandQuery + useServices;
         this.stopProcess = "runas /profile /user:Администратор /savecred \"cmd.exe /c sc stop ";
         this.fullCommandStopProcess = stopProcess + useServices + "\"";
-        this.start = -1;
-        this.end = -1;
         this.line = "";
         this.logger = LoggerFactory.getLogger(StopServices.class);
     }
@@ -101,11 +103,9 @@ public class StopServices {
     /**
      * Used to wait for the process to complete
      */
+    @Step("Wait and check process stop")
     public void waitProcess(){
-
-
-        start = System.currentTimeMillis();
-        Steps.logToAllure("Start of service launch");
+        long start = System.currentTimeMillis();
         logger.debug("Start of service launch");
 
         do {
@@ -115,19 +115,28 @@ public class StopServices {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(queryServices.getInputStream()));
                 line = reader.readLine();
                 reader.close();
+
             } catch (InterruptedException | IOException e) {
-
-                end = System.currentTimeMillis();
-                Steps.logToAllureWithValue("Services don't exist", (end - start));
-                logger.debug("Services don't exist {}",(end - start));
-
+                Assert.fail("error in determining the existence of a service");
+                logger.error("error in determining the existence of a service");
                 e.printStackTrace();
             }
-        } while(!line.contains(codeError));
-
-        end = System.currentTimeMillis();
-        Steps.logToAllureWithValue("Finish of service launch", (end - start));
-        logger.debug("Finish of service launch {}",(end - start));
+        } while( !line.contains(codeError) && processFreeze(start) );
+        Allure.step("Services don't exist", Status.PASSED);
+        step(fullCommandQueryExistProcess);
+        logger.debug("Finish of service launch");
     }
+
+
+    private boolean processFreeze(long start){
+        if( (System.currentTimeMillis() - start) > 20000){
+            Assert.fail("very long time stop service Armada");
+            logger.error("very long time stop service Armada");
+            return  false;
+        } else {
+            return true;
+        }
+    }
+
 
 }

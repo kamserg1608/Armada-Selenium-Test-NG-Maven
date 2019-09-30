@@ -1,9 +1,13 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution.tools.download;
 
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +27,6 @@ public class DownloadDistribution extends AuthenticatorTeamCity {
     //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
     private URL website;
-    private String passFolder;
-    private String nameFile;
     private String fullPathToFile;
     private Logger logger;
 /////////////////////////////////////////////////////////////////
@@ -34,8 +36,6 @@ public class DownloadDistribution extends AuthenticatorTeamCity {
 ///////////////////////////////////////////////////////////////////
     public DownloadDistribution(URL website, String passFolder, String nameFile) {
         this.website = website;
-        this.passFolder = passFolder;
-        this.nameFile = nameFile;
         this.fullPathToFile = passFolder + "\\" + nameFile;
         this.logger = LoggerFactory.getLogger(DownloadDistribution.class);
     }
@@ -45,17 +45,29 @@ public class DownloadDistribution extends AuthenticatorTeamCity {
     /**
      * Use to download the latest version is used "Armada2" default branch
      *
-     * @return Boolean result of exist folder
      */
-    public boolean downloadArmada() {
+    @Step("Download armada")
+    public void downloadArmada() {
         setDefault(new AuthenticatorTeamCity());
         File folderDownload = new File(fullPathToFile);
+        logger.debug("Start download distribution from TeamCity");
         try {
             FileUtils.copyURLToFile(website, folderDownload);
         } catch (IOException e) {
             logger.debug("Don't download file from server");
-            logger.debug(e.toString());
         }
-        return folderDownload.exists();
+        checkDownloadApplication(folderDownload);
     }
+
+    private void checkDownloadApplication(File folderDownload) {
+        if(folderDownload.exists()){
+            Allure.step("correct download application: " + fullPathToFile, Status.PASSED);
+            logger.debug("correct download application {}", fullPathToFile);
+        } else {
+            Assert.fail("No correct download application");
+            logger.error("DownloadDistribution {}", fullPathToFile);
+        }
+    }
+
+
 }

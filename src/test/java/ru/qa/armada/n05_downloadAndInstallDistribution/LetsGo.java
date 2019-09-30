@@ -1,5 +1,6 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution;
 
+import io.qameta.allure.Step;
 import ru.qa.armada.n05_downloadAndInstallDistribution.tools.ArmadaDeployment;
 
 /**
@@ -27,6 +28,7 @@ public class LetsGo {
      * Main function for install distribution
      * installation from the unpacked distribution
      */
+    @Step(value = "Main function for install distribution")
     public void completeInstallationOfArmada() {
         ArmadaDeployment armadaDeployment = new ArmadaDeployment(armadaFolder, uninstall, mainFolder, URL);
         armadaDeployment.deleteArmada();
@@ -34,7 +36,7 @@ public class LetsGo {
         armadaDeployment.downloadAndUnzip();
 
         armadaDeployment.gettingInstallationPathOfArmada();
-        armadaDeployment.workWithUI();
+//        armadaDeployment.workWithUI();
     }
 
     public void smallInstallationOfArmada(){
@@ -43,5 +45,8 @@ public class LetsGo {
         armadaDeployment.gettingInstallationPathOfArmada();
         armadaDeployment.workWithUI();
     }
+
+
+
 
 }

@@ -1,12 +1,15 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution.tools.workWithDownloadFolder;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 /**
  * <h1>This class deleting folder using various checks</h1>
@@ -28,22 +31,31 @@ public class DeleteFolder {
     /**
      * Main function deleting folder
      */
+    @Step(value = "delete folder")
     public void deleteFolder(){
+
         if (folderDownload.isDirectory()) {
+            logger.debug("start delete folder");
             if(folderDownload.list().length != 0 ){
-                long start = System.currentTimeMillis();
                 try {
                     FileUtils.deleteDirectory(folderDownload );
                 } catch (IOException e) {
-                    logger.debug("directory cannot be deleted");
-                    logger.debug(e.toString());
+                    Assert.fail("directory cannot be deleted");
+                    logger.error("directory cannot be deleted");
                 }
-                if(folderDownload.exists()){
-                    logger.debug("delay work not correct");
-                }
-                long end = System.currentTimeMillis();
-                logger.debug("time spent deleting a folder {} {}", passFolder, (end - start));
+                checkDeleteFolder(folderDownload);
+                logger.debug("finish delete folder: {}", passFolder);
             }
+        }
+    }
+
+    private void checkDeleteFolder(File folderDownload) {
+        if(folderDownload.exists()){
+            Assert.fail("don't delete folder Armada");
+            logger.warn("don't delete folder Armada");
+        } else {
+            Allure.step("correct delete folder Armada: " + folderDownload);
+            logger.debug("correct delete folder Armada");
         }
     }
 }

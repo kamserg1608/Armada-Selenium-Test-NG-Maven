@@ -5,6 +5,8 @@ import java.io.FilenameFilter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+
 /**
  * <h1>Searches for the first "distributionArmada.exe" file in the extracted folder</h1>
  *
@@ -45,8 +47,9 @@ public class FindExtFile {
                 arrayFiles = folderDownload.list(filter);
             }
         } catch (Exception e) {
-            logger.debug("It is not possible to view the file list folder");
-            logger.debug(e.toString());
+            Assert.fail("It is not possible to view the file list folder");
+            logger.error("It is not possible to view the file list folder");
+            logger.error(e.toString());
         }
         String firstExeFile = "";
         if (arrayFiles.length != 0) {

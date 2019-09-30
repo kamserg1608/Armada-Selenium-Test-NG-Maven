@@ -5,8 +5,12 @@ import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithAttachment;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
@@ -25,7 +29,6 @@ public class WindowCurrentNodeSetting {
 
     //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
-    private long start, end;
     private TestProcess armadaProcessInstallation;
     private TopLevelWindow windowCurrentNodeSetting;
     private String address;
@@ -41,8 +44,6 @@ public class WindowCurrentNodeSetting {
         this.address = address;
         this.name = name;
         this.windowCurrentNodeSetting = null;
-        this.start = -1;
-        this.end = -1;
         this.logger = LoggerFactory.getLogger(WindowCurrentNodeSetting.class);
     }
 /////////////////////////////////////////////////////////////////
@@ -51,18 +52,14 @@ public class WindowCurrentNodeSetting {
     /**
      * waiting for the current node settings window to appear
      */
+    @Step(value = "appearance of window 'current node setting'")
     private void waitWindowCurrentNodeSetting() {
-
-        start = System.currentTimeMillis();
-        Steps.logToAllure("Start appearance of the 'Current node configuration window'");
+        long start = System.currentTimeMillis();
         logger.debug("Start appearance of the 'Current node configuration window'");
-
-
-        while (true) {
+        while ( processFreeze(start) ) {
             if (checkWindowCurrentNodeSettings() != null) {
-                end = System.currentTimeMillis();
-                Steps.logToAllureWithValue("Finish appearance of the 'Current node configuration window'", (end - start));
-                logger.debug("Finish appearance of the 'Current node configuration window' {}",(end - start));
+                Allure.step("Appearance of 'Current node configuration'", Status.PASSED);
+                logger.debug("Finish appearance of the 'Current node configuration window'");
                 WorkWithAttachment.getScreen("Appearance of 'Current node configuration'");
                 break;
             }
@@ -73,6 +70,17 @@ public class WindowCurrentNodeSetting {
             }
         }
     }
+
+    private boolean processFreeze(long start){
+        if( (System.currentTimeMillis() - start) > 1200000){
+            Assert.fail("don't appearance current node configuration window");
+            logger.error("don't appearance current node configuration window");
+            return  false;
+        } else {
+            return true;
+        }
+    }
+
     private TopLevelWindow checkWindowCurrentNodeSettings(){
         try {
             windowCurrentNodeSetting = (TopLevelWindow) armadaProcessInstallation.tryFind(TopLevelWindow.class, new AWTPattern(){{
@@ -91,6 +99,7 @@ public class WindowCurrentNodeSetting {
      * Usually the address and name are of equal value
      * {@link #setAddressNode() }
      */
+    @Step(value = "set name node")
     private void setNameNode() {
         try {
             Control currentNode = (Control) windowCurrentNodeSetting.tryFind(Control.class, new AWTPattern(){{
@@ -126,6 +135,7 @@ public class WindowCurrentNodeSetting {
      * Usually the address and name are of equal value
      * {@link #setNameNode() }
      */
+    @Step(value = "set address node")
     private void setAddressNode(){
         try {
             Control currentNode = (Control) windowCurrentNodeSetting.tryFind(Control.class, new AWTPattern(){{
@@ -158,6 +168,7 @@ public class WindowCurrentNodeSetting {
     /**
      * keystroke save current node
      */
+    @Step(value = "work with button 'Save setting for current node'")
     private void saveCurrentNode(){
 
         try {
@@ -170,7 +181,7 @@ public class WindowCurrentNodeSetting {
                 safe.clickButton();
             }
 
-            Steps.logToAllure("Click button 'Save Current Mode'");
+            Allure.step("Click button 'Save Current Mode'", Status.PASSED);
             logger.debug("Click button 'Save Current Mode'");
 
         } catch (ObjectTreeNodeNotFoundException | HttpException | InvocationException e) {
@@ -194,6 +205,7 @@ public class WindowCurrentNodeSetting {
      *   </ul>
      * </div>
      */
+    @Step(value = "work with windows 'set current IP'")
     public void setIPCurrentNode(){
         waitWindowCurrentNodeSetting();
         setNameNode();

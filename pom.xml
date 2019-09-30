@@ -266,6 +266,7 @@
 
                 <!--region Allure-->
                     <testFailureIgnore>true</testFailureIgnore>
+
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -281,9 +282,14 @@
                     <systemPropertyVariables>
                         <allure.testNG.version>${allure.testNG.version}</allure.testNG.version>
                         <testNG.version>${testNG.version}</testNG.version>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+
                         <maven-surefire-plugin.version>${maven-surefire-plugin.version}</maven-surefire-plugin.version>
                         <maven-resources-plugin.version>${maven-resources-plugin.version}</maven-resources-plugin.version>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.link.issue.pattern>http://youtrack.ircoc.vrn.ru/issue/{}</allure.link.issue.pattern>
+                        <allure.link.tms.pattern>http://testrail.ircoc.vrn.ru/testrail/index.php?/cases/view/{}</allure.link.tms.pattern>
                     </systemPropertyVariables>
                 <!--endregion AllureEnvironment-->
 

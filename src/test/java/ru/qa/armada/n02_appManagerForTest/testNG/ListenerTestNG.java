@@ -13,12 +13,11 @@ import static io.qameta.allure.Allure.step;
  * This class is used as a different listener of status test
  */
 public class ListenerTestNG extends TestBase implements ITestListener {
-    private static final org.slf4j.Logger logger1 = LoggerFactory.getLogger(ListenerTestNG.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ListenerTestNG.class);
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        String messageForLog = "I am in onTestStart method" + getTestMethodName(iTestResult) + " start";
-        Steps.debugLogToAllure(messageForLog,logger1);
+        logger.debug("I am in onTestStart method {} start", getTestMethodName(iTestResult));
     }
 
     @Override

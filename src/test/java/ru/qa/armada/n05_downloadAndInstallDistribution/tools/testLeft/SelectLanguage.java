@@ -4,8 +4,12 @@ import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.ObjectTreeNodeNotFoundException;
 import com.smartbear.testleft.testobjects.*;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithAttachment;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
@@ -21,7 +25,6 @@ import ru.qa.armada.n02_appManagerForTest.allure.Steps;
  */
 
 public class SelectLanguage {
-    private long start, end;
     private TestProcess armadaProcessInstallation;
     private TopLevelWindow selectLanguage;
     private Logger logger;
@@ -29,27 +32,21 @@ public class SelectLanguage {
     public SelectLanguage(TestProcess armadaProcessInstallation) {
         this.armadaProcessInstallation = armadaProcessInstallation;
         this.selectLanguage = null;
-        this.start = -1;
-        this.end = -1;
         this.logger = LoggerFactory.getLogger(SelectLanguage.class);
     }
 
     /**
      * waiting for the installation window to appear
      */
+    @Step(value = "waiting exist appear windows 'select Language'")
     private void waitingExistSelectLanguage(){
-        start = System.currentTimeMillis();
-        logger.debug("Start waiting windows appear");
-        Steps.logToAllure("Start waiting windows appear");
-
-        while (true) {
+        logger.debug("Start waiting  appear windows 'Select language'");
+        long start = System.currentTimeMillis();
+        while ( processFreeze(start) ) {
             if (checkExistLabelSelectLanguage() != null) {
-
-                end = System.currentTimeMillis();
-                logger.debug("Finish waiting windows appear {}",(end - start));
-                Steps.logToAllureWithValue("Finish waiting windows appear ",(end - start));
+                Allure.step("Appearance of language selection window", Status.PASSED);
                 WorkWithAttachment.getScreen("Appearance of language selection window");
-
+                logger.debug("Finish waiting windows appear");
                 break;
             }
             try {
@@ -59,6 +56,15 @@ public class SelectLanguage {
             }
         }
 
+    }
+    private boolean processFreeze(long start){
+        if( (System.currentTimeMillis() - start) > 1200000){
+            Assert.fail("don't appearance current node configuration window");
+            logger.error("don't appearance current node configuration window");
+            return  false;
+        } else {
+            return true;
+        }
     }
     /**
      * waiting for label the installation window to appear
@@ -81,6 +87,7 @@ public class SelectLanguage {
     /**
      * keystroke applying selected language
      */
+    @Step(value = "click Ok button from window 'select Language'")
     private void acceptanceChosenLanguage(){
         try {
             Button okClick = selectLanguage.find(Button.class, new AWTPattern() {{
@@ -88,6 +95,8 @@ public class SelectLanguage {
                 AWTComponentAccessibleName = "OK";
             }}, 8);
             okClick.clickButton();
+            Allure.step("Click button select language", Status.PASSED);
+            logger.debug("Click button select language");
         } catch (ObjectTreeNodeNotFoundException | HttpException | InvocationException e) {
            e.printStackTrace();
         }
@@ -102,6 +111,7 @@ public class SelectLanguage {
      *   </ul>
      * </div>
      */
+    @Step(value = "work with window 'select Language'")
     public void selectLanguage(){
         waitingExistSelectLanguage();
         acceptanceChosenLanguage();

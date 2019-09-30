@@ -2,9 +2,12 @@ package ru.qa.armada.n05_downloadAndInstallDistribution.tools.testLeft;
 
 import com.smartbear.testleft.*;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
 /**
@@ -25,7 +28,9 @@ public class DriverTestLeft {
     private DriverTestLeft() {
         this.logger = LoggerFactory.getLogger(DriverTestLeft.class);
         try {
-            this.driver = new LocalDriver();
+            driver = new LocalDriver();
+            Allure.step("Create Driver Test Left", Status.PASSED);
+            logger.debug("Create Driver Test Left");
         } catch (HttpException | TestAgentRunException | RestConnectionRefused e) {
             e.printStackTrace();
         }
@@ -40,7 +45,6 @@ public class DriverTestLeft {
                 synchronized(sync){
                     if(instance == null){
                         instance = new DriverTestLeft();
-                        Steps.logToAllure("Create Driver Test Left");
                     }
                 }
             }

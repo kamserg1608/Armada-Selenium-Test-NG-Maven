@@ -33,6 +33,7 @@ public class Steps {
     public static void checkSubtractionStep(int num1, int num2, int expectedResult) {
         int practicalResult = num1 - num2;
         Assert.assertEquals(expectedResult, practicalResult, "Результат вычитания не соответствует ожидаемому значению");
+        checkSummationStep(num1,num2,expectedResult);
     }
 
     @Step(value = "Проверка синуса числа {num}")

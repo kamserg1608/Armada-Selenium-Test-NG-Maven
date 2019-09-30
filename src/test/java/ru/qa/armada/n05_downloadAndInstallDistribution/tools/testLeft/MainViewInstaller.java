@@ -4,8 +4,13 @@ import com.smartbear.testleft.HttpException;
 import com.smartbear.testleft.InvocationException;
 import com.smartbear.testleft.testobjects.*;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithAttachment;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
@@ -30,9 +35,7 @@ public class MainViewInstaller {
     private String iconDesktop;
     private Logger logger;
 
-    private long start, end;
     private TopLevelWindow mainViewInstaller;
-
     private TestProcess armadaProcessInstallation;
 /////////////////////////////////////////////////////////////////
 //endregion
@@ -45,8 +48,6 @@ public class MainViewInstaller {
         this.browser = "Установить браузер Google Chrome";
         this.iconDesktop = "Создать ярлык на Рабочем столе";
         this.mainViewInstaller = null;
-        this.start = -1;
-        this.end = -1;
         this.logger = LoggerFactory.getLogger(MainViewInstaller.class);
     }
 /////////////////////////////////////////////////////////////////
@@ -56,11 +57,9 @@ public class MainViewInstaller {
      * Waiting for the appearance of the work process
      */
     public void waitingForArmadaInstallationWindow(){
-        start = System.currentTimeMillis();
         while (true) {
             if (checkExistArmadaInstallationWindow() != null) {
-                end = System.currentTimeMillis();
-                logger.debug("waiting for the process to start {}", (end - start));
+                logger.debug("waiting for the process to start");
                 WorkWithAttachment.getScreen("Windows Armada Installing");
                 break;
             }
@@ -96,10 +95,9 @@ public class MainViewInstaller {
      * @param AWTComponentName name of checkBox
      * @param checked state of checkbox
      */
-    private void checkBoxActivation(String AWTComponentName, boolean checked) {
-
-        Steps.logToAllureWithValue(AWTComponentName, checked);
-        logger.debug(AWTComponentName, checked);
+    @Step(value = "work with checkBox {englishNameOfCheckBox}")
+    private void checkBoxActivation(String AWTComponentName, boolean checked, String englishNameOfCheckBox) {
+        logger.debug("work with checkBox: {}", englishNameOfCheckBox);
 
         try {
             CheckBox launchOfArmadaServices = (CheckBox) armadaProcessInstallation.tryFind(CheckBox.class, new AWTPattern() {{
@@ -112,6 +110,8 @@ public class MainViewInstaller {
             }
             if ( (launchOfArmadaServices != null) && (launchOfArmadaServices.getwState().getValue() != stateCheckBox) ) {
                 launchOfArmadaServices.click();
+                Allure.step("Activate checkBox", Status.PASSED);
+                logger.debug("Activate: {}", englishNameOfCheckBox);
             }
         } catch (HttpException | InvocationException e) {
             e.printStackTrace();
@@ -135,8 +135,12 @@ public class MainViewInstaller {
             e.printStackTrace();
         }
         if (dontVersionExist != null){
+            Allure.step("No previous installation detected", Status.PASSED);
+            logger.debug("No previous installation detected");
             return true;
         } else {
+            Assert.fail("Don't inspect no previous installation detected");
+            logger.error("Don't inspect no previous installation detected");
             return false;
         }
     }
@@ -144,6 +148,7 @@ public class MainViewInstaller {
     /**
      * Pressing the "start installation" button
      */
+    @Step(value = "work with button 'Start install'")
     private void runInstall(){
 
         try {
@@ -156,12 +161,10 @@ public class MainViewInstaller {
                 begin.clickButton();
             }
 
-            Steps.logToAllure("Click button 'Run Install'");
             logger.debug("Click button 'Run Install'");
-            WorkWithAttachment.getScreen("Run install software 'Armada'");
-
+            WorkWithAttachment.getScreen("Click button 'Run Install' screenshot");
         } catch (HttpException | InvocationException e) {
-            Steps.logToAllure("could not find the button 'Run Install'");
+            Assert.fail("could not find the button 'Run Install'");
             logger.debug("could not find the button 'Run Install'");
             e.printStackTrace();
         }
@@ -173,12 +176,14 @@ public class MainViewInstaller {
      * @param browserCb state of checkBox browser
      * @param iconDesktopCb state of checkBox iconDesktop
      */
+    @Step(value = "work with main Windows 'installation of Armada'")
     public void  startInstall(boolean servicesCb, boolean browserCb, boolean iconDesktopCb){
         if(checkNoPreviousInstallation()){
-            checkBoxActivation(services,servicesCb);
-            checkBoxActivation(browser,browserCb);
-            checkBoxActivation(iconDesktop,iconDesktopCb);
+            checkBoxActivation(services,servicesCb,"servicesCb");
+            checkBoxActivation(browser,browserCb,"browserCb");
+            checkBoxActivation(iconDesktop,iconDesktopCb,"iconDesktopCb");
         }
+
         WorkWithAttachment.getScreen("Appearance of main windows");
         runInstall();
 
@@ -187,29 +192,33 @@ public class MainViewInstaller {
     /**
      * Check on completion of installation
      */
+    @Step(value = "waiting label 'Ready' after complete install program")
     public void waitLabelReadyInstall(){
         try {
-            start = System.currentTimeMillis();
-            Steps.logToAllure("Start waiting for successful installation of Armada");
             logger.debug("Start waiting for successful installation of Armada");
-
-            while (true) {
+            long start = System.currentTimeMillis();
+            while ( processFreeze(start) ) {
                 if (checkLabelReadyInstall() != null) {
-                    end = System.currentTimeMillis();
-                    logger.debug("Finish waiting for successful installation of Armada {}", (end - start));
-                    Steps.logToAllureWithValue("Finish waiting for successful installation of Armada", (end - start));
+                    Allure.step("Appearance of 'successful installation of Armada' - screenshot", Status.PASSED);
+                    logger.debug("Finish waiting for successful installation of Armada");
                     WorkWithAttachment.getScreen("Appearance of 'successful installation of Armada'");
                     break;
                 }
                 Thread.sleep(300);
             }
         } catch (InterruptedException e) {
-
-            end = System.currentTimeMillis();
-            logger.debug("Failed to successfully install Armada {}", (end - start));
-            Steps.logToAllureWithValue("Failed to successfully install Armada", (end - start));
-
+            Assert.fail("Failed to successfully install Armada");
+            logger.debug("Failed to successfully install Armada");
             e.printStackTrace();
+        }
+    }
+    private boolean processFreeze(long start){
+        if( (System.currentTimeMillis() - start) > 1200000){
+            Assert.fail("don't appearance current node configuration window");
+            logger.error("don't appearance current node configuration window");
+            return  false;
+        } else {
+            return true;
         }
     }
 
@@ -233,6 +242,7 @@ public class MainViewInstaller {
     /**
      * clicking on the button to "close the program" installation
      */
+    @Step(value = "work with close button of complete install application")
     public void clickCloseButton() {
         try {
             Button close = (Button) armadaProcessInstallation.tryFind(Button.class, new AWTPattern(){{
@@ -242,9 +252,13 @@ public class MainViewInstaller {
             }},7).get();
             if(close != null){
                 close.clickButton();
+                Allure.step("Close install application", Status.PASSED);
+                logger.debug("Close install application");
             }
         } catch (HttpException | InvocationException e) {
             e.printStackTrace();
+            Assert.fail("Close install application");
+            logger.error("Close install application");
         }
     }
 
