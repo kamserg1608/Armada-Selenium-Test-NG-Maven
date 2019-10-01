@@ -45,6 +45,7 @@ public class WorkWithScreenshot {
     private void getScreenshot(){
         try {
             Robot robot = new Robot();
+            virtualBounds = new Rectangle(1,1,600,600);
             BufferedImage screenShot = robot.createScreenCapture(virtualBounds);
             folderDownload.mkdirs();
             String wayToScreenshots = mainPath + screenshotName;
