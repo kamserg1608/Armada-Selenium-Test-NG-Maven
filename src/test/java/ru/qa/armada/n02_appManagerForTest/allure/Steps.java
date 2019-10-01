@@ -12,35 +12,35 @@ public class Steps {
 
     //region setOfStandardChecks
 ///////////////////////////////////////////////////////////////////
-    @Step(value = "Проверка суммы числа {num1} и числа {num2}")
+    @Step(value = "Checking the sum of a number {num1} and numbers {num2}")
     public static void checkSummationStep123(int num1, int num2, int expectedSum) {
         int practicalResult = num1 + num2;
-        Assert.assertEquals(expectedSum, practicalResult, "Сумма слагаемых не соответствует ожидаемому значению");
+        Assert.assertEquals(expectedSum, practicalResult, "The sum of the terms does not match the expected value");
     }
     @Step
     public static void checkSumStep(int num1, int num2, int expectedSum) {
         int practicalResult = num1 + num2;
-        Assert.assertEquals(expectedSum, practicalResult, "Сумма слагаемых не соответствует ожидаемому значению");
+        Assert.assertEquals(expectedSum, practicalResult, "The sum of the terms does not match the expected value");
     }
 
-    @Step(value = "Проверка суммы числа {num1} и числа {num2}")
+    @Step(value = "Checking the sum of a number {num1} and numbers {num2}")
     public static void checkSummationStep(int num1, int num2, int expectedSum) {
         int practicalResult = num1 + num2;
-        Assert.assertEquals(expectedSum, practicalResult, "Сумма слагаемых не соответствует ожидаемому значению");
+        Assert.assertEquals(expectedSum, practicalResult, "The sum of the terms does not match the expected value");
     }
 
-    @Step(value = "Проверка разности числа {num1} и числа {num2}")
+    @Step(value = "Checking the difference of a number {num1} and numbers {num2}")
     public static void checkSubtractionStep(int num1, int num2, int expectedResult) {
         int practicalResult = num1 - num2;
-        Assert.assertEquals(expectedResult, practicalResult, "Результат вычитания не соответствует ожидаемому значению");
+        Assert.assertEquals(expectedResult, practicalResult, "The result of the subtraction does not match the expected value");
         checkSummationStep(num1,num2,expectedResult);
     }
 
-    @Step(value = "Проверка синуса числа {num}")
+    @Step(value = "Checking the sine of a number {num}")
     public static void checkSinStep(int num, double expectedResult) {
         double actual = Math.sin(num);
         double delta = 0.1;
-//        Assert.assertEquals(expectedResult, actual, delta, "Результат выражения не соответствует ожидаемому значению");
+//        Assert.assertEquals(expectedResult, actual, delta, "The result of the subtraction does not match the expected value");
         Assert.assertEquals(expectedResult, actual, delta);
     }
 ////////////////////////////////////////////////////////////////

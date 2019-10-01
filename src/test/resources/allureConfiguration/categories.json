@@ -1,8 +1,8 @@
 [
   {
-    "name": "Неизвестная проблема",
+    "name": "Unknown problem",
     "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
-    "messageRegex": ".*что-то пошло не так.*"
+    "messageRegex": ".*Something went wrong.*"
   },
   {
     "name": "No data",

@@ -44,7 +44,7 @@ public class TestClass {
     }
 
 
-    @Test(enabled = false)
+    @Test
     @Description("Armada software installation")
     public void fullSoftwareInstall() {
         LetsGo letsGo = new LetsGo();
@@ -204,7 +204,7 @@ public class TestClass {
     public void testDemoCategories3() throws Exception {
         //какие-то проверки, которые могут вызывать Exception
         Steps.checkSumStep(1, 2, 3);
-        throw new Exception("что-то пошло не так");
+        throw new Exception("Something went wrong");
     }
 
     @Test
