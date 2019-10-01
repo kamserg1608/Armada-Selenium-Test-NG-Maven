@@ -44,7 +44,7 @@ public class TestClass {
     }
 
 
-    @Test
+    @Test(enabled = false)
     @Description("Armada software installation")
     public void fullSoftwareInstall() {
         LetsGo letsGo = new LetsGo();
@@ -69,7 +69,7 @@ public class TestClass {
         Steps.infoLogToAllure("Logged to allure: AZAZA", logger1);
 //        logger1.info("Logged to allure: " + "AZAZA");
         Assert.assertTrue(true);
-
+        WorkWithAttachment.getScreen("Appearance of language selection window");
     }
 
     @Test
