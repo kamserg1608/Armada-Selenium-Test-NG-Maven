@@ -1,10 +1,15 @@
 package ru.qa.armada.n02_appManagerForTest.allure;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.io.Files;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.LoggerFactory;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
+
+import java.io.File;
 
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
@@ -57,6 +62,13 @@ public class WorkWithEnvironmentProperties {
         logger.info("browser_Name = " + browserName);
         logger.info("browser_Version = " + browserVersion);
         logger.info("---------------");
+        SingletonWebDriver.driver.navigate().to("http://gserver.ircoc.vrn.ru/ircosweb/?p=507");
+        File screenshot = ((TakesScreenshot) SingletonWebDriver.driver).getScreenshotAs(OutputType.FILE);
+        try {
+            Files.copy(screenshot, new File("C:\\screen.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SingletonWebDriver.driver.quit();
     }
 

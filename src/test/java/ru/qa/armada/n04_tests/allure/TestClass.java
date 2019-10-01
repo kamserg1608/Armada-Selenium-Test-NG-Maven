@@ -1,7 +1,11 @@
 package ru.qa.armada.n04_tests.allure;
 
+import com.google.common.io.Files;
 import io.qameta.allure.*;
 import static io.qameta.allure.Allure.step;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -13,6 +17,7 @@ import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 import ru.qa.armada.n05_downloadAndInstallDistribution.LetsGo;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.ThreadLocalRandom;
@@ -55,6 +60,14 @@ public class TestClass {
 
     @Test
     public void testDemoConnectionSuccess() {
+//        SingletonWebDriver.getInstance();
+//        SingletonWebDriver.driver.manage().window().maximize();
+//        File screenshot = ((TakesScreenshot) SingletonWebDriver.driver).getScreenshotAs(OutputType.FILE);
+//        try {
+//            Files.copy(screenshot, new File("C:\\screen.png"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         Steps.checkSumStep(3, 2, 5);
         Steps.infoLogToAllure("ARTEM", logger1);
 //        logger1.info("ARTEM");
