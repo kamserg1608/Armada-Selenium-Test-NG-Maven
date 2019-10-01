@@ -36,7 +36,7 @@ public class LetsGo {
         armadaDeployment.downloadAndUnzip();
 
         armadaDeployment.gettingInstallationPathOfArmada();
-//        armadaDeployment.workWithUI();
+        armadaDeployment.workWithUI();
     }
 
     public void smallInstallationOfArmada(){
