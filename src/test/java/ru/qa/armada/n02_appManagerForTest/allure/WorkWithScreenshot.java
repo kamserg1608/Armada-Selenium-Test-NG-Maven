@@ -1,5 +1,10 @@
 package ru.qa.armada.n02_appManagerForTest.allure;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -49,6 +54,17 @@ public class WorkWithScreenshot {
             BufferedImage screenShot = robot.createScreenCapture(virtualBounds);
             folderDownload.mkdirs();
             String wayToScreenshots = mainPath + screenshotName;
+
+//            String wayToScreenshots2 = mainPath + " 1" + screenshotName;
+//            File scrFile = ((TakesScreenshot) SingletonWebDriver.driver).getScreenshotAs(OutputType.FILE);
+//            FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot.png"));
+            Robot r = new Robot();
+            String path = "C://Shot.jpg";
+            Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            BufferedImage Image = r.createScreenCapture(capture);
+            ImageIO.write(Image, "jpg", new File(path));
+            System.out.println("Screenshot saved");
+
             ImageIO.write(screenShot, "JPG", new File(wayToScreenshots));
         } catch (AWTException | IOException e) {
             e.printStackTrace();
