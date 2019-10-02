@@ -49,7 +49,7 @@ public class TestClass {
     }
 
 
-    @Test(enabled = false)
+    @Test
     @Description("Armada software installation")
     public void fullSoftwareInstall() {
         LetsGo letsGo = new LetsGo();

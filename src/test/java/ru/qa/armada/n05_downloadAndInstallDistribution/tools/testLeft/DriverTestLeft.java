@@ -10,6 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * <h1>singleton driver work "TestLeft" </h1>
  *
@@ -29,6 +34,14 @@ public class DriverTestLeft {
         this.logger = LoggerFactory.getLogger(DriverTestLeft.class);
         try {
             driver = new LocalDriver();
+            try {
+                BufferedImage bufferedImage = driver.getDesktop().picture();
+                ImageIO.write(bufferedImage, "PNG", new File("C:\\PrintScreen.png"));
+            } catch (InvocationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Allure.step("Create Driver Test Left", Status.PASSED);
             logger.debug("Create Driver Test Left");
         } catch (HttpException | TestAgentRunException | RestConnectionRefused e) {
