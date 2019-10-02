@@ -60,7 +60,7 @@ public class MainViewInstaller {
         while (true) {
             if (checkExistArmadaInstallationWindow() != null) {
                 logger.debug("waiting for the process to start");
-                WorkWithAttachment.getScreen("Windows Armada Installing");
+                WorkWithAttachment.getScreenTestLeft("Windows Armada Installing");
                 break;
             }
             try {
@@ -162,7 +162,7 @@ public class MainViewInstaller {
             }
 
             logger.debug("Click button 'Run Install'");
-            WorkWithAttachment.getScreen("Click button 'Run Install' screenshot");
+            WorkWithAttachment.getScreenTestLeft("Click button 'Run Install' screenshot");
         } catch (HttpException | InvocationException e) {
             Assert.fail("could not find the button 'Run Install'");
             logger.debug("could not find the button 'Run Install'");
@@ -184,7 +184,7 @@ public class MainViewInstaller {
             checkBoxActivation(iconDesktop,iconDesktopCb,"iconDesktopCb");
         }
 
-        WorkWithAttachment.getScreen("Appearance of main windows");
+        WorkWithAttachment.getScreenTestLeft("Appearance of main windows");
         runInstall();
 
     }
@@ -201,7 +201,7 @@ public class MainViewInstaller {
                 if (checkLabelReadyInstall() != null) {
                     Allure.step("Appearance of 'successful installation of Armada' - screenshot", Status.PASSED);
                     logger.debug("Finish waiting for successful installation of Armada");
-                    WorkWithAttachment.getScreen("Appearance of 'successful installation of Armada'");
+                    WorkWithAttachment.getScreenTestLeft("Appearance of 'successful installation of Armada'");
                     break;
                 }
                 Thread.sleep(300);

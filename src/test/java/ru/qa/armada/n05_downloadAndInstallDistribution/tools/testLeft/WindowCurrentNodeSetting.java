@@ -60,7 +60,7 @@ public class WindowCurrentNodeSetting {
             if (checkWindowCurrentNodeSettings() != null) {
                 Allure.step("Appearance of 'Current node configuration'", Status.PASSED);
                 logger.debug("Finish appearance of the 'Current node configuration window'");
-                WorkWithAttachment.getScreen("Appearance of 'Current node configuration'");
+                WorkWithAttachment.getScreenTestLeft("Appearance of 'Current node configuration'");
                 break;
             }
             try {
@@ -210,7 +210,7 @@ public class WindowCurrentNodeSetting {
         waitWindowCurrentNodeSetting();
         setNameNode();
         setAddressNode();
-        WorkWithAttachment.getScreen("Setting set'Current node configuration'");
+        WorkWithAttachment.getScreenTestLeft("Setting set'Current node configuration'");
         saveCurrentNode();
     }
 }

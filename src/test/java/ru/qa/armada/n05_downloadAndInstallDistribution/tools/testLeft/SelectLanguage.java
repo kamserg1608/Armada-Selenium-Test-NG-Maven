@@ -45,7 +45,8 @@ public class SelectLanguage {
         while ( processFreeze(start) ) {
             if (checkExistLabelSelectLanguage() != null) {
                 Allure.step("Appearance of language selection window", Status.PASSED);
-                WorkWithAttachment.getScreen("Appearance of language selection window");
+
+                WorkWithAttachment.getScreenTestLeft("Appearance of language selection window");
                 logger.debug("Finish waiting windows appear");
                 break;
             }

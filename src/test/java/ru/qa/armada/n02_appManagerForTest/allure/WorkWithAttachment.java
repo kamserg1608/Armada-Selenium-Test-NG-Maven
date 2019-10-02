@@ -42,4 +42,8 @@ public class WorkWithAttachment {
         WorkWithScreenshot workWithScreenshot = new WorkWithScreenshot();
         workWithScreenshot.addScreenshotToAllure(allureName);
     }
+    public static void getScreenTestLeft(String allureName) {
+        WorkWithScreenshot workWithScreenshot = new WorkWithScreenshot();
+        workWithScreenshot.addScreenshotToAllureTestLeft(allureName);
+    }
 }

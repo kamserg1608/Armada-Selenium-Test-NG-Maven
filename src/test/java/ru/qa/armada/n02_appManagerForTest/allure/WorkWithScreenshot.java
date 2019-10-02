@@ -1,9 +1,12 @@
 package ru.qa.armada.n02_appManagerForTest.allure;
 
+import com.smartbear.testleft.HttpException;
+import com.smartbear.testleft.InvocationException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
+import ru.qa.armada.n05_downloadAndInstallDistribution.tools.testLeft.DriverTestLeft;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,6 +21,7 @@ public class WorkWithScreenshot {
     private GraphicsEnvironment ge;
     private String mainPath;
     private String screenshotName;
+    private String wayToScreenshots;
     private File folderDownload;
 
 
@@ -34,7 +38,8 @@ public class WorkWithScreenshot {
         this.mainPath = mainPath.concat(relativePath).replace("\\","\\\\");
 
         this.folderDownload= new File(mainPath);
-
+        this.wayToScreenshots = mainPath + screenshotName;
+        folderDownload.mkdirs();
     }
 
     private void takeDimensions(){
@@ -52,19 +57,8 @@ public class WorkWithScreenshot {
             Robot robot = new Robot();
             virtualBounds = new Rectangle(1,1,600,600);
             BufferedImage screenShot = robot.createScreenCapture(virtualBounds);
-            folderDownload.mkdirs();
-            String wayToScreenshots = mainPath + screenshotName;
-
-//            String wayToScreenshots2 = mainPath + " 1" + screenshotName;
-//            File scrFile = ((TakesScreenshot) SingletonWebDriver.driver).getScreenshotAs(OutputType.FILE);
-//            FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot.png"));
-            Robot r = new Robot();
-            String path = "C://Shot.jpg";
             Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-            BufferedImage Image = r.createScreenCapture(capture);
-            ImageIO.write(Image, "jpg", new File(path));
-            System.out.println("Screenshot saved");
-
+            BufferedImage Image = robot.createScreenCapture(capture);
             ImageIO.write(screenShot, "JPG", new File(wayToScreenshots));
         } catch (AWTException | IOException e) {
             e.printStackTrace();
@@ -72,13 +66,21 @@ public class WorkWithScreenshot {
     }
 
     public void addScreenshotToAllure(String allureName){
-
         takeDimensions();
         getScreenshot();
-
         try {
             WorkWithAttachment.getBytesScreenshot(this.screenshotName, allureName);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addScreenshotToAllureTestLeft(String allureName){
+        try {
+            BufferedImage bufferedImage = DriverTestLeft.driver.getDesktop().picture();
+            ImageIO.write(bufferedImage, "JPG", new File(wayToScreenshots));
+            WorkWithAttachment.getBytesScreenshot(this.screenshotName, allureName);
+        } catch (IOException | HttpException | InvocationException e) {
             e.printStackTrace();
         }
     }
