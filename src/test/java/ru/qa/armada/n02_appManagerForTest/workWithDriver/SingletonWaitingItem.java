@@ -39,6 +39,7 @@ public class SingletonWaitingItem{
    */
   public static void waitElementVisibly(Element element){
     wait.until( ExpectedConditions.visibilityOf(element.getWebElement()) );
+//    wait.until();
   }
 
   /**
