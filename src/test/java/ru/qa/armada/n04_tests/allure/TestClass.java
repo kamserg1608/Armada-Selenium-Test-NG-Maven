@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithAttachment;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithEnvironmentProperties;
+import ru.qa.armada.n02_appManagerForTest.testNG.TestBase;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 import ru.qa.armada.n05_downloadAndInstallDistribution.LetsGo;
@@ -35,7 +36,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TestClass {
     private static final org.slf4j.Logger logger1 = LoggerFactory.getLogger(TestClass.class);
 
-    @BeforeSuite(enabled = false)
+    @BeforeSuite
     public void addEnvironment(){
         WorkWithEnvironmentProperties workWithEnvironmentProperties = new WorkWithEnvironmentProperties();
         workWithEnvironmentProperties.creatingFileEnvironmentXml();
