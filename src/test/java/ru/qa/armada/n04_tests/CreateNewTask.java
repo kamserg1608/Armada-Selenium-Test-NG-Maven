@@ -10,7 +10,7 @@ import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n01_c
 @Listeners({ ru.qa.armada.n02_appManagerForTest.testNG.ListenerTestNG.class, ru.qa.armada.n02_appManagerForTest.testNG.RunSkipAndErrorInterceptor.class })
 public class CreateNewTask extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testCreateNewTask() {
     RadioMonitoring radioMonitoring = new RadioMonitoring();
     Tasks tasks = radioMonitoring.selectPageTask();

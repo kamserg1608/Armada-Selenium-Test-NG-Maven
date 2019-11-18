@@ -10,6 +10,7 @@ public class WorkWithAttachment {
     private static final String RESOURCES = "src/test/resources/attachments";
     private static final String JAVADOC = "src/test/resources/doc-files";
     private static final String SCREENSHOT = "target/screenshots";
+    private static final String TEAMCITY = "";
     private static final String LOGTEXT = "target/logsSlf4j";
     private WorkWithAttachment() {
         throw new IllegalAccessError("Utility class");
@@ -19,7 +20,10 @@ public class WorkWithAttachment {
     public static byte[] getBytesJavaDoc(String resourceName) throws IOException {
         return Files.readAllBytes(Paths.get(JAVADOC, resourceName));
     }
-
+    @Attachment
+    public static byte[] getBytesTC(String resourceName) throws IOException {
+        return Files.readAllBytes(Paths.get(TEAMCITY, resourceName));
+    }
     @Attachment
     public static byte[] getBytes(String resourceName) throws IOException {
         return Files.readAllBytes(Paths.get(RESOURCES, resourceName));

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 @Listeners({ ru.qa.armada.n02_appManagerForTest.testNG.ListenerTestNG.class, ru.qa.armada.n02_appManagerForTest.testNG.RunSkipAndErrorInterceptor.class })
 public class CheckLogin extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testCheckLogin() {
     Logger logger = LoggerFactory.getLogger(CheckLogin.class);
     logger.debug("Hello World");

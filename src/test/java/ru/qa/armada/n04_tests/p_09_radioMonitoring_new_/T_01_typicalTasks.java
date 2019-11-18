@@ -22,7 +22,7 @@ import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n02_e
 public class T_01_typicalTasks extends TestBase {
 
     @TmsLink(value = "108894")
-    @Test
+    @Test(enabled = false)
     @Description("creatingTypicalTask")
     public void C108894_test() {
         RadioMonitoring radioMonitoring = new RadioMonitoring();
@@ -90,7 +90,7 @@ public class T_01_typicalTasks extends TestBase {
 
 //    @Test(enabled = false)
     @TmsLink(value = "108895")
-    @Test()
+    @Test(enabled = false)
     @Ignore
     @Description("repetitionTypicalTaskNames")
     public void C108895_test(){

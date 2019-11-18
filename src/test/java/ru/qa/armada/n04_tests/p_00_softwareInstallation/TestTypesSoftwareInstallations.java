@@ -14,7 +14,7 @@ import static io.qameta.allure.Allure.step;
 public class TestTypesSoftwareInstallations {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestTypesSoftwareInstallations.class);
 
-    @Test
+    @Test(enabled = false)
     @Description("Check for correct installation from unpacked archive from TC")
     public void executeSmallInstalling() {
         step("Start small installing the armada program");
@@ -27,7 +27,7 @@ public class TestTypesSoftwareInstallations {
         logger.debug("Finish small installing the armada program");
     }
 
-    @Test()
+    @Test(enabled = false)
     @Description("verification of the correct installation with the complete procedure including downloading from TC")
     public void executeCompleteInstalling() {
         step("Start complete installing the armada program");

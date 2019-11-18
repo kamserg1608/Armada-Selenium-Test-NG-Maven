@@ -92,17 +92,17 @@ public class MainViewInstaller {
 
     /**
      * switching the checkBox to the desired state
-     * @param AWTComponentName name of checkBox
+     * @param AWTComponentName1 name of checkBox
      * @param checked state of checkbox
      */
     @Step(value = "work with checkBox {englishNameOfCheckBox}")
-    private void checkBoxActivation(String AWTComponentName, boolean checked, String englishNameOfCheckBox) {
+    private void checkBoxActivation(String AWTComponentName1, boolean checked, String englishNameOfCheckBox) {
         logger.debug("work with checkBox: {}", englishNameOfCheckBox);
 
         try {
             CheckBox launchOfArmadaServices = (CheckBox) armadaProcessInstallation.tryFind(CheckBox.class, new AWTPattern() {{
                 JavaFullClassName = "javax.swing.JCheckBox";
-                AWTComponentAccessibleName = AWTComponentName;
+                AWTComponentAccessibleName = AWTComponentName1;
             }},8).get();
             int stateCheckBox = 0;
             if(checked){
