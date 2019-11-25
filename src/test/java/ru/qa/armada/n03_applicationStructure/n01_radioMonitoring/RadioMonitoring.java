@@ -124,7 +124,7 @@ public class RadioMonitoring {
   public Tasks selectPageTask(){
     tabTask.click();
     labelTaskWait();
-    WorkWithAttachment.getScreen("selectPage");
+    WorkWithAttachment.getScreenWebdriver("selectPage");
     return new Tasks();
   }
 
@@ -137,8 +137,8 @@ public class RadioMonitoring {
 //      step("selectPageResult");
       tabResult.click();
       labelResultWait();
-//      WorkWithAttachment.getScreen("open task result");
-//      WorkWithAttachment.getScreen("resultPage");
+//      WorkWithAttachment.getScreenWebdriver("open task result");
+//      WorkWithAttachment.getScreenWebdriver("resultPage");
       WorkWithAttachment.getScreenWebdriver("resultPage");
       return new Tasks();
     }

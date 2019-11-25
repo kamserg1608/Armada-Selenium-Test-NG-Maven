@@ -76,7 +76,7 @@ public class TestClass2 {
         Steps.infoLogToAllure("Logged to allure: AZAZA", logger1);
 //        logger1.info("Logged to allure: " + "AZAZA");
         Assert.assertTrue(true);
-        WorkWithAttachment.getScreen("Appearance of language selection window");
+        WorkWithAttachment.getScreenWebdriver("Appearance of language selection window");
     }
 
     @Test(enabled = false)
@@ -95,14 +95,14 @@ public class TestClass2 {
         WorkWithAttachment.getBytes("picture.jpg");
         WorkWithAttachment.getBytes("text.txt");
         WorkWithAttachment.getBytesLog("testFile.log");
-        WorkWithAttachment.getScreen("CatDogAndDuck1");
+        WorkWithAttachment.getScreenWebdriver("CatDogAndDuck1");
         Assert.assertTrue(true);
     }
 
     @Test(enabled = false)
     public void testDemoAttachments2() throws IOException {
         WorkWithAttachment.getBytesAnnotationWithArgs("json.json");
-        WorkWithAttachment.getScreen("CatDogAndDuck2");
+        WorkWithAttachment.getScreenWebdriver("CatDogAndDuck2");
         Assert.assertTrue(true);
     }
 
