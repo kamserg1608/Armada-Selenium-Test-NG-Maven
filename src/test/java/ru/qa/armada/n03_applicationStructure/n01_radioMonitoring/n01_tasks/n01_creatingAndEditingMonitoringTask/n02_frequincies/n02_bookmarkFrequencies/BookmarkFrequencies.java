@@ -61,9 +61,9 @@ public class BookmarkFrequencies {
    */
   public void clickAddFrequency(){
     add.click();
-    SingletonWaitingItem.waitElementVisibly(addFrequency);
+    SingletonWaitingItem.waitElementVisiblyOrError(addFrequency);
     addFrequency.click();
-    SingletonWaitingItem.waitElementVisibly(windowsAddFrequency);
+    SingletonWaitingItem.waitElementVisiblyOrError(windowsAddFrequency);
   }
   /**
    * Set frequency in window "add frequency"

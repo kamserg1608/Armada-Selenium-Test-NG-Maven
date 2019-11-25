@@ -54,7 +54,7 @@ public class WorkWithEnvironmentProperties {
                         .build(), System.getProperty("user.dir") + "/target/allure-results/");
     }
     private void gettingBrowserReferenceData(){
-        SingletonWebDriver.getInstance();
+        SingletonWebDriver.getInstance(true);
         Capabilities cap = ((RemoteWebDriver) SingletonWebDriver.driver).getCapabilities();
         browserName = cap.getBrowserName();
         browserVersion = cap.getVersion();
@@ -63,12 +63,12 @@ public class WorkWithEnvironmentProperties {
         logger.info("browser_Version = " + browserVersion);
         logger.info("---------------");
         SingletonWebDriver.driver.navigate().to("http://gserver.ircoc.vrn.ru/ircosweb/?p=507");
-        File screenshot = ((TakesScreenshot) SingletonWebDriver.driver).getScreenshotAs(OutputType.FILE);
-        try {
-            Files.copy(screenshot, new File("C:\\screen.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        File screenshot = ((TakesScreenshot) SingletonWebDriver.driver).getScreenshotAs(OutputType.FILE);
+//        try {
+//            Files.copy(screenshot, new File("C:\\screen.png"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         SingletonWebDriver.driver.quit();
     }
 

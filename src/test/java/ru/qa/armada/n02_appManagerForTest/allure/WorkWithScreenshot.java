@@ -42,6 +42,7 @@ public class WorkWithScreenshot {
         folderDownload.mkdirs();
     }
 
+    //TODO: use old version of dimension param for screenshot
     private void takeDimensions(){
         GraphicsDevice[] gs = ge.getScreenDevices();
         for (GraphicsDevice gd : gs) {
@@ -54,11 +55,12 @@ public class WorkWithScreenshot {
 
     private void getScreenshot(){
         try {
-            Robot robot = new Robot();
-            virtualBounds = new Rectangle(1,1,600,600);
-            BufferedImage screenShot = robot.createScreenCapture(virtualBounds);
-            Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-            BufferedImage Image = robot.createScreenCapture(capture);
+//            Robot robot = new Robot();
+//            virtualBounds = new Rectangle(1,1,600,600);
+//            BufferedImage screenShot = robot.createScreenCapture(virtualBounds);
+//            Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+//            BufferedImage Image = robot.createScreenCapture(capture);
+            BufferedImage screenShot = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
             ImageIO.write(screenShot, "JPG", new File(wayToScreenshots));
         } catch (AWTException | IOException e) {
             e.printStackTrace();
@@ -66,7 +68,7 @@ public class WorkWithScreenshot {
     }
 
     public void addScreenshotToAllure(String allureName){
-        takeDimensions();
+//        takeDimensions();
         getScreenshot();
         try {
             WorkWithAttachment.getBytesScreenshot(this.screenshotName, allureName);
@@ -84,6 +86,7 @@ public class WorkWithScreenshot {
             e.printStackTrace();
         }
     }
+
 }
 
 

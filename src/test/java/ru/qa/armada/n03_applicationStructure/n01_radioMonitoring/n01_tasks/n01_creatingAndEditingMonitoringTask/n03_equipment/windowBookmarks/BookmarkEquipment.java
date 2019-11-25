@@ -68,7 +68,7 @@ public class BookmarkEquipment {
    */
   public void addRange(){
     addParameters.click();
-    SingletonWaitingItem.waitElementVisibly(labelCreateParametrov);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelCreateParametrov);
   }
 
   /**

@@ -63,8 +63,6 @@ public class StopServices {
      * Used to stop services through the manipulation of the command "sc query"
      * for check process
      *
-     *  @throws IOException if something went wrong
-     *  @throws InterruptedException if something went wrong
      * <h3>Uses the following functions.</h3>
      * <div>
      *   <ul>
@@ -72,31 +70,55 @@ public class StopServices {
      *   </ul>
      * </div>
      */
-    public void stopProcess() throws IOException, InterruptedException {
-        Process queryServices = Runtime.getRuntime().exec(fullCommandQueryExistProcess);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(queryServices.getInputStream()));
-        String line = reader.readLine();
-        reader.close();
+    public void stopProcess() {
+        try {
+            Process queryServices = Runtime.getRuntime().exec(fullCommandQueryExistProcess);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(queryServices.getInputStream()));
+            String line = reader.readLine();
+            reader.close();
 
-        if (!line.contains(codeError)) {
-            Process queryServicesRunOrNot = Runtime.getRuntime().exec(fullCommandQueryExistProcess);
-            BufferedReader readerRunOrNot = new BufferedReader(new InputStreamReader(queryServicesRunOrNot.getInputStream()));
+            if (!line.contains(codeError)) {
+                Process queryServicesRunOrNot = Runtime.getRuntime().exec(fullCommandQueryExistProcess);
+                BufferedReader readerRunOrNot = new BufferedReader(new InputStreamReader(queryServicesRunOrNot.getInputStream()));
 
-            //region read until there is no status bar
-            //////////////////////////////////////////////
-            readerRunOrNot.readLine();
-            readerRunOrNot.readLine();
-            readerRunOrNot.readLine();
-            String findRun = readerRunOrNot.readLine();
-            //////////////////////////////////////////////
-            //endregion
+                //region read until there is no status bar
+                //////////////////////////////////////////////
+                readerRunOrNot.readLine();
+                readerRunOrNot.readLine();
+                readerRunOrNot.readLine();
+                String findRun = readerRunOrNot.readLine();
+                //////////////////////////////////////////////
+                //endregion
 
-            readerRunOrNot.close();
+                readerRunOrNot.close();
 
-            if (findRun.contains("RUN")) {
-                Process stopArmada = Runtime.getRuntime().exec(fullCommandStopProcess);
-                stopArmada.waitFor();
+                if (findRun.contains("RUN")) {
+                    Process stopArmada = Runtime.getRuntime().exec(fullCommandStopProcess);
+                    stopArmada.waitFor();
+                }
             }
+        } catch (Exception e) {
+            Assert.fail("don't stop process Armada");
+        }
+    }
+
+    public void killProcess(){
+        try {
+            char slash = (char) 0x5c;
+            char quote = (char) 0x22;
+            String sq = "" + slash + quote;
+            String currentDir = System.getProperty("user.dir");
+            String pathToKill = "src\\test\\resources\\powershell\\ArmadaSU.ps1";
+            String fullPath = currentDir.concat(pathToKill).replace("\\","\\\\");
+//        String command = "powershell.exe  \"C:\\Users\\Cont\\Desktop\\ArmadaSU.ps1\" ";
+            String command = "powershell.exe ".concat(sq).concat(fullPath).concat(sq);
+//        String command = "Start-Process \"$psHome\\powershell.exe\" -Verb Runas -ArgumentList (\"cmd.exe /c 'taskkill /IM ArmadaSU.exe' /T /F\")\n";
+            // Executing the command
+            Process powerShellProcess = Runtime.getRuntime().exec(command);
+            // Getting the results
+            powerShellProcess.getOutputStream().close();
+        } catch (IOException e) {
+            Assert.fail("don't kill process");
         }
     }
 

@@ -113,7 +113,7 @@ public class MonitoringTask {
    */
   public TypicalTask selectTypicalTask() {
     headerTypicalTask.click();
-    SingletonWaitingItem.waitElementVisibly(labelNote);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelNote);
     return new TypicalTask();
   }
 
@@ -124,7 +124,7 @@ public class MonitoringTask {
    */
   public Frequencies selectFrequencies() {
     headerFrequencies.click();
-    SingletonWaitingItem.waitElementVisibly(labelSpectroscope);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelSpectroscope);
     return new Frequencies();
   }
 
@@ -135,7 +135,7 @@ public class MonitoringTask {
    */
   public Equipment selectEquipment() {
     headerEquipment.click();
-    SingletonWaitingItem.waitElementVisibly(labelFactoryNumber);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelFactoryNumber);
     return new Equipment();
   }
 

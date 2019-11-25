@@ -10,17 +10,19 @@
  */
 package ru.qa.armada.n03_applicationStructure.loginPage;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.CustomFieldDecorator;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.Button;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.TextField;
 import ru.qa.armada.n01_workWithWebElement.webPageElements.WaitElement;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * <h1>This class work with "login form of Armada"</h1>
@@ -35,11 +37,19 @@ import org.slf4j.LoggerFactory;
 
 public class LoginPage {
 
-    private Logger logger;
-
+  private Logger logger;
+  @FindBy(tagName = "select")
+  private Select select;
 
   //region elementDefinitionBlock
 ///////////////////////////////////////////////////////////////////
+//  By sessionExpired = By.xpath("//div[@id='stylized']/h2[text()='Время сеанса истекло, необходима авторизация']");
+  @FindBy(xpath = "//div[@id='stylized']/h2[text()='Время сеанса истекло, необходима авторизация']")
+  private WaitElement sessionExpired;
+  /**
+   * Locator -  Main tree "Command centre"
+   */
+
   @FindBy(xpath = "//h1[@id='armadaLoginTitle']")
   private WaitElement labelLoginPage;
   /**
@@ -47,6 +57,12 @@ public class LoginPage {
    */
   @FindBy(xpath = "//span[text()='Радиоконтроль']")
   private WaitElement commandCentre;
+
+  /**
+   * Locator -  Element for wait loading services
+   */
+  @FindBy(xpath = "//span[text()='Радиоконтроль']")
+  private WaitElement labelLoading;
 
   /**
    * Locator -  Login field
@@ -65,6 +81,12 @@ public class LoginPage {
    */
   @FindBy(id = "loginButton")
   private Button buttonLogin;
+
+  /**
+   * Locator - Button "Authorization" of window "Session Expired"
+   */
+  @FindBy(id = "sessionExpiredLink")
+  private Button authorization;
 
   /**
    * Locator - Allert Access is denied
@@ -114,16 +136,16 @@ public class LoginPage {
   public void submitLogin() {
     buttonLogin.click();
   }
-
-  /**
-   * WaitElement Command Center of main windows Armada
-   */
-  public void waitMainPage() {
-    SingletonWaitingItem.waitElementVisibly(commandCentre);
-  }
-  public void waitLoginPage(){
-    SingletonWaitingItem.waitElementVisibly(labelLoginPage);
-  }
+//
+//  /**
+//   * WaitElement Command Center of main windows Armada
+//   */
+//  public boolean waitMainPage() {
+//    return SingletonWaitingItem.waitElementVisiblyOrError(commandCentre);
+//  }
+//  public boolean waitLoginPage(){
+//    return SingletonWaitingItem.waitElementVisiblyOrError(labelLoginPage);
+//  }
 
 
   /**
@@ -135,28 +157,31 @@ public class LoginPage {
    *     <li> Use the {@link #writeUserName(String) } method.</li>
    *     <li> Use the {@link #writePassword(String) } method. </li>
    *     <li> Use the {@link #submitLogin() } method. </li>
-   *     <li> Use the {@link #waitMainPage() } method. </li>
    *   </ul>
    * </div>
    *
    * @param username Use Login "admin"
    * @param password Use Password "admin"
    */
+  @Step("login in Armada login form")
   public void submitAutorization(String username, String password) {
-    boolean aa = true;
-    int a = 0;
-    while(aa){
-      try {
-        waitLoginPage();
-        aa = false;
-        a += 20;
-      } catch (Exception e) {
-          logger.debug("Request Exceeded {}" , a);
-      }
-    }
+    logger.debug("Work with submit Autorization");
+    Assert.assertTrue(SingletonWaitingItem.waitElementVisiblyOrError(labelLoginPage));
+    assert SingletonWaitingItem.waitElementVisiblyOrError(labelLoginPage);
+//    Assert.assertTrue( waitLoginPage() );
     writeUserName(username);
     writePassword(password);
     submitLogin();
-    waitMainPage();
+    assert SingletonWaitingItem.waitElementVisiblyOrError(commandCentre);
+  }
+
+  @Step("CheckSessionExpired")
+  public void checkSessionExpired() {
+    if(SingletonWaitingItem.waitElementVisibly(sessionExpired)){
+      Assert.assertTrue(SingletonWaitingItem.waitElementVisiblyOrError(sessionExpired));
+      authorization.click();
+    } else {
+      Assert.assertTrue(SingletonWaitingItem.waitElementInvisiblyOrError(sessionExpired));
+    }
   }
 }

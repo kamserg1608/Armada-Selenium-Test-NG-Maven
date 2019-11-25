@@ -75,7 +75,7 @@ public class Tasks {
    */
   public MonitoringTask addTask() {
     buttonAddTask.click();
-    SingletonWaitingItem.waitElementVisibly(creatingMonitoringJob);
+    SingletonWaitingItem.waitElementVisiblyOrError(creatingMonitoringJob);
     return new MonitoringTask();
   }
 
@@ -86,7 +86,7 @@ public class Tasks {
    */
   public ReferenceTask addTypicalTask() {
     buttonAddTypicalTask.click();
-    SingletonWaitingItem.waitElementVisibly(windowDirectoryEditing);
+    SingletonWaitingItem.waitElementVisiblyOrError(windowDirectoryEditing);
     return new ReferenceTask();
   }
 

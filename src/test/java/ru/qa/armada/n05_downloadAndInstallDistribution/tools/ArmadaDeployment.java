@@ -4,6 +4,7 @@ import com.smartbear.testleft.testobjects.TestProcess;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.qameta.allure.model.Status;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -76,14 +77,117 @@ public class ArmadaDeployment {
             DeletePathAndService deletePathAndService = new DeletePathAndService(uninstall);
             deletePathAndService.deleteArmada();
 
-            String processName = "ArmadaSU";
-            StopServices stopServices = new StopServices(processName);
-            stopServices.waitProcess();
+//            String processName = "ArmadaSU";
+//            StopServices stopServices = new StopServices(processName);
+//            stopServices.waitProcess();
+            waitStopProcessArmada();
 
             DeleteFolder deleteFolderArmada = new DeleteFolder(armadaFolder);
             deleteFolderArmada.deleteFolder();
         }
     }
+    @Step(value = "stop process of Armada")
+    public void waitStopProcessArmada(){
+        String processName = "ArmadaSU";
+        StopServices stopServices = new StopServices(processName);
+        stopServices.waitProcess();
+    }
+
+    @Step(value = "stop process of Armada")
+    public void killServiceArmadaSU(){
+        try {
+            String currentDir = System.getProperty("user.dir");
+            String pathToKill = "\\src\\test\\resources\\pws\\ArmadaSUKill.ps1";
+            String fullPath = currentDir.concat(pathToKill);
+//        String command = "powershell.exe  \"C:\\Users\\Cont\\Desktop\\ArmadaSUKill Force.ps1\" ";
+            String command = "powershell.exe  \"".concat(fullPath).concat("\" ");
+            logger.debug("Start Kill service Armada SU {}", command);
+            Process powerShellProcess = Runtime.getRuntime().exec(command);
+            waitOfCorrectKill();
+            powerShellProcess.getOutputStream().close();
+            logger.debug("Stop Kill service Armada SU {}", command);
+        } catch (Exception e) {
+            Assert.fail("Don't kill service armada");
+        }
+    }
+
+
+    @Step(value = "stop process of postgress")
+    public void killPostgress(){
+        try {
+            String currentDir = System.getProperty("user.dir");
+            String pathToKill = "\\src\\test\\resources\\pws\\PostgresSUKill.ps1";
+            String fullPath = currentDir.concat(pathToKill);
+//        String command = "powershell.exe  \"C:\\Users\\Cont\\Desktop\\ArmadaSUKill Force.ps1\" ";
+            String command = "powershell.exe  \"".concat(fullPath).concat("\" ");
+            logger.debug("Start Kill Postgress process {}", command);
+            Process powerShellProcess = Runtime.getRuntime().exec(command);
+            waitOfCorrectKill();
+            powerShellProcess.getOutputStream().close();
+            logger.debug("Stop Kill Postgress process {}", command);
+        } catch (Exception e) {
+            Assert.fail("Don't kill postgress");
+        }
+    }
+    @Step(value = "Clean dataBase")
+    public void copyCleanDataBase(){
+        try {
+            File sourceLocation= new File("c:\\armada\\dbClean");
+            File targetLocation = new File("c:\\armada\\db");
+            logger.debug("Start copy clean database {}", "c:\\armada\\dbClean");
+            FileUtils.copyDirectory(sourceLocation, targetLocation);
+            logger.debug("Stop copy clean database {}", "c:\\armada\\dbClean");
+        } catch (Exception e) {
+            Assert.fail("Don't copy clean database");
+        }
+    }
+    @Step(value = "Delete old dataBase")
+    public void deleteDataBase(){
+        try {
+            logger.debug("Start delete database {}", "c:\\armada\\db");
+            FileUtils.deleteDirectory(new File("c:\\armada\\db"));
+            logger.debug("Stop delete database {}", "c:\\armada\\db");
+        } catch (Exception e) {
+            Assert.fail("Don't copy clean database");
+        }
+    }
+    @Step(value = "Clean dataBase")
+    public void backUpDatabase(){
+        try {
+            File sourceLocation= new File("c:\\armada\\db");
+            File targetLocation = new File("c:\\armada\\dbClean");
+            logger.debug("Start backup database {}", "c:\\armada\\db");
+            FileUtils.copyDirectory(sourceLocation, targetLocation);
+            logger.debug("Stop backup database {}", "c:\\armada\\db");
+        } catch (Exception e) {
+            Assert.fail("Don't create clean database");
+        }
+    }
+
+
+
+    @Step(value = "start process of Armada")
+    public void startServiceArmadaSU() {
+        try {
+            String currentDir = System.getProperty("user.dir");
+            String pathToKill = "\\src\\test\\resources\\pws\\ArmadaSUStart.ps1";
+            String fullPath = currentDir.concat(pathToKill);
+//        String command = "powershell.exe  \"C:\\Users\\Cont\\Desktop\\ArmadaSUStartForce.ps1\" ";
+            String command = "powershell.exe  \"".concat(fullPath).concat("\" ");
+            logger.debug("Start service armada SU process {}", command);
+            Process powerShellProcess = Runtime.getRuntime().exec(command);
+            waitOfCorrectKill();
+            powerShellProcess.getOutputStream().close();
+            logger.debug("Stop service armada SU process {}", command);
+        } catch (Exception e) {
+            Assert.fail("Don't start service armada");
+        }
+    }
+
+    private void waitOfCorrectKill() throws InterruptedException {
+        Thread.sleep(20000);
+    }
+
     /**
      * Used to download the latest successful version from the TC
      * and unpack the packaged distribution

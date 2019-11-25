@@ -63,7 +63,7 @@ public class TypicalTaskSelection {
    */
   @Deprecated
   public void selectTask() {
-    SingletonWaitingItem.waitElementVisibly(measurementSignalParameters);
+    SingletonWaitingItem.waitElementVisiblyOrError(measurementSignalParameters);
     measurementSignalParameters.click();
     try {
       SingletonWaitingItem.waitElementAttributeContain(measurementSignalParameters,"class", "x-grid3-highlightrow");

@@ -1,6 +1,7 @@
 package ru.qa.armada.n05_downloadAndInstallDistribution;
 
 import io.qameta.allure.Step;
+import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
 import ru.qa.armada.n05_downloadAndInstallDistribution.tools.ArmadaDeployment;
 
 /**
@@ -37,14 +38,33 @@ public class LetsGo {
 
         armadaDeployment.gettingInstallationPathOfArmada();
         armadaDeployment.workWithUI();
+
+        armadaDeployment.killServiceArmadaSU();
+        armadaDeployment.killPostgress();
+        armadaDeployment.backUpDatabase();
+        armadaDeployment.startServiceArmadaSU();
     }
 
+    @Step(value = "small Main function for install distribution")
     public void smallInstallationOfArmada(){
         ArmadaDeployment armadaDeployment = new ArmadaDeployment(armadaFolder, uninstall, mainFolder, URL);
         armadaDeployment.deleteArmada();
         armadaDeployment.gettingInstallationPathOfArmada();
         armadaDeployment.workWithUI();
+        armadaDeployment.backUpDatabase();
     }
+
+    @Step(value = "take Clean Armada")
+    public void takeCleanArmada(){
+        ArmadaDeployment armadaDeployment = new ArmadaDeployment(armadaFolder, uninstall, mainFolder, URL);
+        armadaDeployment.killServiceArmadaSU();
+        armadaDeployment.killPostgress();
+        armadaDeployment.deleteDataBase();
+        SingletonWaitingItem.sleep(20000);
+        armadaDeployment.copyCleanDataBase();
+        armadaDeployment.startServiceArmadaSU();
+    }
+
 
 
 

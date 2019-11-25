@@ -1,5 +1,6 @@
 package ru.qa.armada.n02_appManagerForTest.workWithDriver;
 
+import org.apache.commons.logging.impl.AvalonLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,6 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,6 +18,9 @@ import java.net.URL;
  * This class is used as a singleton to work with the WebDriver
  */
 public class SingletonWebDriver {
+
+
+  private Logger logger = LoggerFactory.getLogger(SingletonWebDriver.class);
   private String browser = BrowserType.CHROME;
   private static final Object sync = new Object();
 
@@ -30,6 +36,7 @@ public class SingletonWebDriver {
 //    System.setProperty("webdriver.gecko.driver", "C:\\...\\ArmadaTests\\drivers\\\geckodriver.exe")
 //    System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
     System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+    logger.debug("Create new WebDriver");
 //    driver = new ChromeDriver();
     switch (browser) {
       case BrowserType.FIREFOX:
@@ -56,14 +63,15 @@ public class SingletonWebDriver {
    * Creating an instance of the selected driver
    * @return WebDriver created
    */
-  public static SingletonWebDriver getInstance(){
-    if(instance == null){
+  public static SingletonWebDriver getInstance(boolean NewDriverCreate){
+    if(instance == null || NewDriverCreate){
       synchronized(sync){
-        if(instance == null)
+        if(instance == null || NewDriverCreate)
           instance = new SingletonWebDriver();
       }
     }
     return instance;
   }
+
 
 }

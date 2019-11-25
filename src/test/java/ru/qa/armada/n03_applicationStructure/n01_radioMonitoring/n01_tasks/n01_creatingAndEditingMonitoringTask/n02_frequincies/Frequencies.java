@@ -72,14 +72,14 @@ public class Frequencies {
    */
   public void selectBookmarkFrequency(){
     bookmarkFrequency.click();
-    SingletonWaitingItem.waitElementVisibly(labelFrequency);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelFrequency);
   }
   /**
    * Click SubTab Ranges of tab Frequency
    */
   public void selectBookmarkRanges(){
     bookmarkRanges.click();
-    SingletonWaitingItem.waitElementVisibly(labelRanges);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelRanges);
   }
 
   /**

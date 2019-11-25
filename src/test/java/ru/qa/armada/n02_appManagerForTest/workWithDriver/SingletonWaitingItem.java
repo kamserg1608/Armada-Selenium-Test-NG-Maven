@@ -1,22 +1,30 @@
 package ru.qa.armada.n02_appManagerForTest.workWithDriver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.qa.armada.n01_workWithWebElement.elementDecorator.Element;
 
 /**
  * This class is used as a singleton to work with the WaitWebDriver
  */
 public class SingletonWaitingItem{
-  private static WebDriverWait wait;
+  public static WebDriverWait wait;
   private int time = 20;
   private static final Object sync = new Object();
+  private Logger logger = LoggerFactory.getLogger(SingletonWaitingItem.class);
 
   private static volatile SingletonWaitingItem instance = null;
 
   private SingletonWaitingItem(){
     wait = new WebDriverWait(SingletonWebDriver.driver, time);
+    logger.debug("Create new WebDriverWait");
   }
 
   /**
@@ -37,9 +45,26 @@ public class SingletonWaitingItem{
    * Waiting for an item is Visibly
    * @param element locator
    */
-  public static void waitElementVisibly(Element element){
-    wait.until( ExpectedConditions.visibilityOf(element.getWebElement()) );
-//    wait.until();
+  public static boolean waitElementVisiblyOrError(Element element) {
+      try {
+        wait.until( ExpectedConditions.visibilityOf(element.getWebElement()) );
+        return true;
+      } catch (Exception e) {
+        Assert.fail("No such element : " + element.getWebElement().toString());
+        return false;
+      }
+  }
+  /**
+   * Waiting for an item is Visibly
+   * @param element locator
+   */
+  public static boolean waitElementVisibly(Element element) {
+    try {
+      wait.until( ExpectedConditions.visibilityOf(element.getWebElement()) );
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   /**
@@ -65,10 +90,29 @@ public class SingletonWaitingItem{
    * Wait until the item disappears
    * @param element locator
    */
-  public static void waitElementInvisibly(Element element){
-    wait.until( ExpectedConditions.invisibilityOf(element.getWebElement()) );
+  public static boolean waitElementInvisiblyOrError(Element element){
+    try {
+      wait.until( ExpectedConditions.visibilityOf(element.getWebElement()) );
+      return false;
+    } catch (NoSuchElementException | TimeoutException e) {
+      return true;
+    } catch (Exception e) {
+      Assert.fail("No such element : " + element.getWebElement().toString());
+      return false;
+    }
   }
-
+  /**
+   * Wait until the item disappears
+   * @param element locator
+   */
+  public static boolean waitElementInvisibly(Element element){
+    try {
+      wait.until( ExpectedConditions.invisibilityOf((WebElement)element) );
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
   /**
    * Wait until the item is clickable
    * @param element locator
@@ -79,11 +123,18 @@ public class SingletonWaitingItem{
 
   /**
    * Waiting for an item to appear
-   * @param element locator
+   * @param locator
    */
-  public static void presenceOfElementLocated(By element){
-    wait.until( ExpectedConditions.presenceOfElementLocated(element) );
+  public static boolean presenceOfElementLocated(By locator){
+    try {
+      wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+
   }
+
 
   /**
    * Stop program execution

@@ -3,40 +3,29 @@ package ru.qa.armada.n04_tests.allure;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.util.ContextInitializer;
 import ch.qos.logback.core.joran.spi.JoranException;
-import com.google.common.io.Files;
 import io.qameta.allure.*;
-import static io.qameta.allure.Allure.step;
-
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.testng.Assert;
-import org.testng.annotations.*;
-
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.*;
 import ru.qa.armada.n02_appManagerForTest.allure.Steps;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithAttachment;
 import ru.qa.armada.n02_appManagerForTest.allure.WorkWithEnvironmentProperties;
-import ru.qa.armada.n02_appManagerForTest.testNG.TestBase;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWaitingItem;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 import ru.qa.armada.n05_downloadAndInstallDistribution.LetsGo;
 import ru.qa.armada.n05_downloadAndInstallDistribution.tools.TC.AllParamatersForRunPostTC;
 import ru.qa.armada.n05_downloadAndInstallDistribution.tools.TC.WorkWithRunTC;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.Paths;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * USERESRESRESR
  */
-@Listeners({ ru.qa.armada.n02_appManagerForTest.testNG.ListenerTestNG.class, ru.qa.armada.n02_appManagerForTest.testNG.RunSkipAndErrorInterceptor.class })
-public class TestClass {
-    private static final org.slf4j.Logger logger1 = LoggerFactory.getLogger(TestClass.class);
+//@Listeners({ ru.qa.armada.n02_appManagerForTest.testNG.ListenerTestNG.class, ru.qa.armada.n02_appManagerForTest.testNG.RunSkipAndErrorInterceptor.class })
+public class BuildDownloadAndInstall {
+    private static final org.slf4j.Logger logger1 = LoggerFactory.getLogger(BuildDownloadAndInstall.class);
 
-    @BeforeSuite
+    @BeforeTest
     public void addEnvironment(){
         WorkWithEnvironmentProperties workWithEnvironmentProperties = new WorkWithEnvironmentProperties();
         workWithEnvironmentProperties.creatingFileEnvironmentXml();
@@ -95,8 +84,20 @@ public class TestClass {
     public void fullSoftwareInstall() {
         LetsGo letsGo = new LetsGo();
         letsGo.completeInstallationOfArmada();
-        SingletonWebDriver.getInstance();
-        SingletonWaitingItem.getInstance();
+//        SingletonWebDriver.getInstance(false);
+//        SingletonWaitingItem.getInstance();
+    }
+
+    @Epic(value = "All Installation")
+    @Feature(value = "Installation")
+    @Story(value = "download and installation")
+    @Test(enabled = false, priority = 2)
+    @Description("Armada software download and installation")
+    public void smallSoftwareInstall() {
+        LetsGo letsGo = new LetsGo();
+        letsGo.smallInstallationOfArmada();
+//        SingletonWebDriver.getInstance(false);
+//        SingletonWaitingItem.getInstance();
     }
 
 }

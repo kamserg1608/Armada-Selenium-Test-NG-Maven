@@ -71,7 +71,7 @@ public class Equipment{
    */
   public void activateTabEquipment(){
     tabEquipment.click();
-    SingletonWaitingItem.waitElementVisibly(labelRangePatameters);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelRangePatameters);
   }
 
   /**
@@ -79,7 +79,7 @@ public class Equipment{
    */
   public void activateTabAntennas(){
     tabAntennas.click();
-    SingletonWaitingItem.waitElementVisibly(labelAntennaRangePatameters);
+    SingletonWaitingItem.waitElementVisiblyOrError(labelAntennaRangePatameters);
   }
 
   // TODO: Need use table of equipment

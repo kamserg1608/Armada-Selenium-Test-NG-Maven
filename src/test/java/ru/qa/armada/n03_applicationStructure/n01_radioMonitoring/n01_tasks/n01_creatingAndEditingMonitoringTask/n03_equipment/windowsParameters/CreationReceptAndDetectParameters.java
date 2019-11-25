@@ -76,7 +76,7 @@ public class CreationReceptAndDetectParameters {
    */
   @Deprecated
   public void addComplexRange(){
-    SingletonWaitingItem.waitElementVisibly(leftRange);
+    SingletonWaitingItem.waitElementVisiblyOrError(leftRange);
     enteringRange();
     SingletonWaitingItem.sleep(2000);
     activateCheckBox();

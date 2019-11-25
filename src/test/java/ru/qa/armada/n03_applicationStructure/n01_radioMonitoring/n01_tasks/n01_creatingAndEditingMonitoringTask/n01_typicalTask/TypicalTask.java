@@ -115,8 +115,8 @@ public class TypicalTask {
   public void chooseTypicalTask() {
     setNameTask("AZAZ");
     openSampleTasks.click();
-    SingletonWaitingItem.waitElementVisibly(taskSelectionPanel);
-    SingletonWaitingItem.presenceOfElementLocated(groupMeasurementType);
+    SingletonWaitingItem.waitElementVisiblyOrError(taskSelectionPanel);
+//    SingletonWaitingItem.presenceOfElementLocated(groupMeasurementType);
 
 //    TypicalTaskSelection typicalTaskSelection = new TypicalTaskSelection();
     typicalTaskSelection.selectTask();
