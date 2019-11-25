@@ -138,7 +138,8 @@ public class RadioMonitoring {
       tabResult.click();
       labelResultWait();
 //      WorkWithAttachment.getScreen("open task result");
-      WorkWithAttachment.getScreen("resultPage");
+//      WorkWithAttachment.getScreen("resultPage");
+      WorkWithAttachment.getScreenWebdriver("resultPage");
       return new Tasks();
     }
 

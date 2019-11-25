@@ -43,7 +43,7 @@ public class TestViewOfMainTabs extends TestBase {
 
   @Epic(value = "View of main window")
   @Feature(value = "Normal tab view")
-  @Test
+  @Test(enabled = false)
   @Description("check correct rest")
   public void testCreateNewTask1() {
     RadioMonitoring radioMonitoring = new RadioMonitoring();
@@ -54,7 +54,7 @@ public class TestViewOfMainTabs extends TestBase {
 
   @Epic(value = "View of main window")
   @Feature(value = "Normal tab view")
-  @Test
+  @Test(enabled = false)
   @Description("check correct state of view tab RadioMonitoring")
   public void testCreateNewTask2() {
     logger.debug("Start testCreateNewTask");

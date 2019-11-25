@@ -76,6 +76,25 @@ public class WorkWithScreenshot {
             e.printStackTrace();
         }
     }
+    public void addScreenshotToAllureWebdriver(String allureName){
+        //Convert web driver object to TakeScreenshot
+        TakesScreenshot scrShot =((TakesScreenshot) SingletonWebDriver.driver);
+        //Call getScreenshotAs method to create image file
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        File fl = new File(this.wayToScreenshots);
+        try {
+            FileUtils.copyFile(SrcFile, fl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        getScreenshot();
+        try {
+            WorkWithAttachment.getBytesScreenshot(this.screenshotName, allureName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void addScreenshotToAllureTestLeft(String allureName){
         try {
