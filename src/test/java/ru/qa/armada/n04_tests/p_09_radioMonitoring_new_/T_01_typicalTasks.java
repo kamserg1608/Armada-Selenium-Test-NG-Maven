@@ -11,11 +11,11 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ru.qa.armada.n02_appManagerForTest.workWithDriver.SingletonWebDriver;
 import ru.qa.armada.n02_appManagerForTest.testNG.TestBase;
-import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.RadioMonitoring;
-import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.Tasks;
-import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n02_editingOfReferenceTasks.CreatingTypicalMonitoringTask;
-import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n02_editingOfReferenceTasks.ReferenceTask;
-import ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n02_editingOfReferenceTasks.tabs.MeasurementOfSignalParameters;
+import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.RadioMonitoring;
+import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.n01_Tasks.Tasks;
+import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.n01_Tasks.n02_editingOfReferenceTasks.CreatingTypicalMonitoringTask;
+import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.n01_Tasks.n02_editingOfReferenceTasks.ReferenceTask;
+import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.n01_Tasks.n02_editingOfReferenceTasks.tabs.MeasurementOfSignalParameters;
 
 @Epic(value = "p_09_radioMonitoring_new_")
 @Feature(value = "Creating, editing, sending typical tasks")

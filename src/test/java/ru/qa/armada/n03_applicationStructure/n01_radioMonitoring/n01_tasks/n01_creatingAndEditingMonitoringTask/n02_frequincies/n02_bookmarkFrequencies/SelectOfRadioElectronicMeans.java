@@ -1,4 +1,0 @@
-package ru.qa.armada.n03_applicationStructure.n01_radioMonitoring.n01_tasks.n01_creatingAndEditingMonitoringTask.n02_frequincies.n02_bookmarkFrequencies;
-
-public class SelectOfRadioElectronicMeans {
-}
