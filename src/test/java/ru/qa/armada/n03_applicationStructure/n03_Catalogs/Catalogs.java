@@ -21,13 +21,13 @@ import ru.qa.armada.n03_applicationStructure.n03_Catalogs.n09_ProtectedObjects.P
 
 /**
  *
- * <h1>This class work with SubMenu "Database"</h1>
+ * <h1>This class work with SubMenu "Catalogs"</h1>
  *
  * @author KamyninSA
  * @version 1.0
  * <p><b>Graphic representation of the page object pattern: </b></p>
  * <p>
- *   <img src="{@docRoot}/doc-files/tabMainMenu/Database.png" alt="Database.png">
+ *   <img src="{@docRoot}/doc-files/tabMainMenu/Catalogs.png" alt="Catalogs.png">
  * </p>
  * */
 public class Catalogs {

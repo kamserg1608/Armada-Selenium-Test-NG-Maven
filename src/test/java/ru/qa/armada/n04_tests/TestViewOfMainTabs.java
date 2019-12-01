@@ -18,6 +18,12 @@ import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.n01_Tasks.Tasks
 import ru.qa.armada.n03_applicationStructure.n01_RadioMonitoring.n01_Tasks.n01_creatingAndEditingMonitoringTask.MonitoringTask;
 import ru.qa.armada.n03_applicationStructure.n02_Database.Database;
 import ru.qa.armada.n03_applicationStructure.n03_Catalogs.Catalogs;
+import ru.qa.armada.n03_applicationStructure.n04_FileStorage.FileStorage;
+import ru.qa.armada.n03_applicationStructure.n05_InterferenceRequest.InterferenceRequest;
+import ru.qa.armada.n03_applicationStructure.n06_TasksToExternalStaff.TasksToExternalStaff;
+import ru.qa.armada.n03_applicationStructure.n07_Marking.Marking;
+import ru.qa.armada.n03_applicationStructure.n08_Administration.Administration;
+import ru.qa.armada.n03_applicationStructure.n09_AboutTheProgram.AboutTheProgram;
 
 @Listeners({ ru.qa.armada.n02_appManagerForTest.testNG.ListenerTestNG.class, ru.qa.armada.n02_appManagerForTest.testNG.RunSkipAndErrorInterceptor.class })
 public class TestViewOfMainTabs extends TestBase {
@@ -70,22 +76,91 @@ public class TestViewOfMainTabs extends TestBase {
   }
 
   @Epic(value = "View of main window")
-  @Feature(value = "Normal tab view")
-  @Test
-  @Description("check correct state of view tab Catalogs")
-  public void testCheckCatalogs() {
-    logger.debug("Start testCheckCatalogs");
-    Catalogs catalogs = new Catalogs();
-    catalogs.openTabCatalogs();
-    catalogs.selectPageManagementObjects();
-    catalogs.selectPageRadioMonitoringEquipment();
-    catalogs.selectPageAntennas();
-    catalogs.selectPageStaff();
-    catalogs.selectPageBandNorms();
-    catalogs.selectPageFrequencyNorms();
-    catalogs.selectPageChannelNumbers();
-    catalogs.selectPageTVAndRVChannels();
-    catalogs.selectPageProtectedObjects();
-    logger.debug("Stop testCheckCatalogs");
+      @Feature(value = "Normal tab view")
+      @Test
+      @Description("check correct state of view tab Catalogs")
+      public void testCheckCatalogs() {
+          logger.debug("Start testCheckCatalogs");
+          Catalogs catalogs = new Catalogs();
+          catalogs.openTabCatalogs();
+          catalogs.selectPageManagementObjects();
+          catalogs.selectPageRadioMonitoringEquipment();
+          catalogs.selectPageAntennas();
+          catalogs.selectPageStaff();
+          catalogs.selectPageBandNorms();
+          catalogs.selectPageFrequencyNorms();
+          catalogs.selectPageChannelNumbers();
+          catalogs.selectPageTVAndRVChannels();
+          catalogs.selectPageProtectedObjects();
+          logger.debug("Stop testCheckCatalogs");
   }
+
+    @Epic(value = "View of main window")
+    @Feature(value = "Normal tab view")
+    @Test
+    @Description("check correct state of view tab FileStorage")
+    public void testCheckFileStorage() {
+        logger.debug("Start testCheckFileStorage");
+        FileStorage fileStorage = new FileStorage();
+        fileStorage.selectPageFileStorage();
+        logger.debug("Stop testCheckFileStorage");
+    }
+    @Epic(value = "View of main window")
+    @Feature(value = "Normal tab view")
+    @Test
+    @Description("check correct state of view tab InterferenceRequest")
+    public void testCheckInterferenceRequest() {
+        logger.debug("Start testCheckInterferenceRequest");
+        InterferenceRequest interferenceRequest = new InterferenceRequest();
+        interferenceRequest.selectPageInterferenceRequest();
+        logger.debug("Stop testCheckInterferenceRequest");
+    }
+    @Epic(value = "View of main window")
+    @Feature(value = "Normal tab view")
+    @Test
+    @Description("check correct state of view tab TasksToExternalStaff")
+    public void testCheckTasksToExternalStaff() {
+        logger.debug("Start testCheckTasksToExternalStaff");
+        TasksToExternalStaff tasksToExternalStaff = new TasksToExternalStaff();
+        tasksToExternalStaff.selectPageTasksToExternalStaff();
+        logger.debug("Stop testCheckTasksToExternalStaff");
+    }
+
+    @Epic(value = "View of main window")
+    @Feature(value = "Normal tab view")
+    @Test
+    @Description("check correct state of view tab Marking")
+    public void testCheckMarking() {
+        logger.debug("Start testCheckMarking");
+        Marking marking = new Marking();
+        marking.selectPageMarking();
+        logger.debug("Stop testCheckMarking");
+    }
+    @Epic(value = "View of main window")
+    @Feature(value = "Normal tab view")
+    @Test
+    @Description("check correct state of view tab Administration")
+    public void testCheckAdministration() {
+        logger.debug("Start testCheckAdministration");
+        Administration administration = new Administration();
+        administration.openTabAdministration();
+        administration.selectPageTechnicalEvents();
+        administration.selectPageSysLog();
+        administration.selectPageAuthorizationLog();
+        administration.selectPageRoles();
+        administration.selectPageStateOfCommunicationChannels();
+        administration.selectPageNodes();
+        administration.selectPageReportTemplates();
+        logger.debug("Stop testCheckAdministration");
+    }
+    @Epic(value = "View of main window")
+    @Feature(value = "Normal tab view")
+    @Test
+    @Description("check correct state of view tab AboutTheProgram")
+    public void testCheckAboutTheProgram() {
+        logger.debug("Start testCheckAboutTheProgram");
+        AboutTheProgram aboutTheProgram = new AboutTheProgram();
+        aboutTheProgram.selectPageAboutTheProgram();
+        logger.debug("Stop testCheckAboutTheProgram");
+    }
 }
